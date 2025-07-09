@@ -10,6 +10,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-mochiyPopOne: Mochiy Pop One, sans-serif;
+  --font-plusJakartaSans: Plus Jakarta Sans, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -27,4 +29,8 @@ body {
 
 .clip-diagonal {
   clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+}
+
+p {
+  font-family: var(--font-plusJakartaSans);
 }

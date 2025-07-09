@@ -1,26 +1,25 @@
+"use client";
+import { useRef, useEffect, useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { Award, Heart, Users, Leaf, Handshake } from "lucide-react";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import FAQSection from "@/components/FAQSection";
+import { Mochiy_Pop_One, Fredoka } from "next/font/google";
 
-'use client';
-import { useRef, useEffect, useState } from 'react';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { Award, Heart, Users, Leaf, Handshake } from 'lucide-react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import FAQSection from '@/components/FAQSection';
-import { Truculenta, Fredoka } from 'next/font/google';
-
-const poppins = Truculenta({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+const mochiyPopOne = Mochiy_Pop_One({
+  subsets: ["latin"],
+  weight: ["400"],
 });
 const fredoka = Fredoka({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
-
 
 const AboutPage = () => {
   const { t } = useLanguage();
   const carouselRef = useRef<HTMLDivElement | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const moveSlide = (direction: number) => {
     const carousel = carouselRef.current;
     if (!carousel) return; // hindari null error
@@ -31,61 +30,67 @@ const AboutPage = () => {
     carousel.style.transform = `translateX(-${newIndex * 100}%)`;
   };
 
-
   const values = [
     {
       icon: Heart,
-      title: 'Passion',
-      titleId: 'Passion',
-      description: 'Every piece is crafted with love and dedication to traditional Indonesian woodworking.',
-      descriptionId: 'Setiap karya dibuat dengan cinta dan dedikasi terhadap kerajinan kayu tradisional Indonesia.',
+      title: "Passion",
+      titleId: "Passion",
+      description:
+        "Every piece is crafted with love and dedication to traditional Indonesian woodworking.",
+      descriptionId:
+        "Setiap karya dibuat dengan cinta dan dedikasi terhadap kerajinan kayu tradisional Indonesia.",
     },
     {
       icon: Award,
-      title: 'Quality',
-      titleId: 'Kualitas',
-      description: 'We use only the finest materials and time-tested techniques to ensure lasting beauty.',
-      descriptionId: 'Kami hanya menggunakan bahan terbaik dan teknik yang telah teruji waktu untuk memastikan keindahan yang tahan lama.',
+      title: "Quality",
+      titleId: "Kualitas",
+      description:
+        "We use only the finest materials and time-tested techniques to ensure lasting beauty.",
+      descriptionId:
+        "Kami hanya menggunakan bahan terbaik dan teknik yang telah teruji waktu untuk memastikan keindahan yang tahan lama.",
     },
     {
       icon: Leaf,
-      title: 'Sustainability',
-      titleId: 'Keberlanjutan',
-      description: 'Our commitment to eco-friendly practices protects the environment for future generations.',
-      descriptionId: 'Komitmen kami terhadap praktik ramah lingkungan melindungi lingkungan untuk generasi mendatang.',
+      title: "Sustainability",
+      titleId: "Keberlanjutan",
+      description:
+        "Our commitment to eco-friendly practices protects the environment for future generations.",
+      descriptionId:
+        "Komitmen kami terhadap praktik ramah lingkungan melindungi lingkungan untuk generasi mendatang.",
     },
     {
       icon: Users,
-      title: 'Community',
-      titleId: 'Komunitas',
-      description: 'We support local artisans and contribute to the preservation of traditional crafts.',
-      descriptionId: 'Kami mendukung pengrajin lokal dan berkontribusi pada pelestarian kerajinan tradisional.',
+      title: "Community",
+      titleId: "Komunitas",
+      description:
+        "We support local artisans and contribute to the preservation of traditional crafts.",
+      descriptionId:
+        "Kami mendukung pengrajin lokal dan berkontribusi pada pelestarian kerajinan tradisional.",
     },
   ];
   const stats = [
     {
       icon: Handshake,
-      value: '10+',
-      label: 'Mitra UMKM',
+      value: "10+",
+      label: "Mitra UMKM",
     },
     {
       icon: Heart,
-      value: '50+',
-      label: 'Jenis Produk',
+      value: "50+",
+      label: "Jenis Produk",
     },
     {
       icon: Users,
-      value: '20+',
-      label: 'Tenaga Kerja',
+      value: "20+",
+      label: "Tenaga Kerja",
     },
   ];
   const imageUrls = [
-    'https://www.plantoys.com/cdn/shop/files/5468_-_Main_-_sq.jpg?v=1736326555&width=720',
-    'https://www.plantoys.com/cdn/shop/files/5513_-_Main_-_sq.jpg?v=1736325206&width=720',
-    'https://www.plantoys.com/cdn/shop/files/3601_-_Main_-_sq.jpg?v=1740988991&width=720',
-    'https://www.plantoys.com/cdn/shop/files/5264_-_Main_-_sq.jpg?v=1737537624&width=720',
-    'https://www.plantoys.com/cdn/shop/files/4646_-_Main_-_sq.jpg?v=1737706381&width=720',
-
+    "https://www.plantoys.com/cdn/shop/files/5468_-_Main_-_sq.jpg?v=1736326555&width=720",
+    "https://www.plantoys.com/cdn/shop/files/5513_-_Main_-_sq.jpg?v=1736325206&width=720",
+    "https://www.plantoys.com/cdn/shop/files/3601_-_Main_-_sq.jpg?v=1740988991&width=720",
+    "https://www.plantoys.com/cdn/shop/files/5264_-_Main_-_sq.jpg?v=1737537624&width=720",
+    "https://www.plantoys.com/cdn/shop/files/4646_-_Main_-_sq.jpg?v=1737706381&width=720",
   ];
 
   const [currentImage, setCurrentImage] = useState(0);
@@ -113,12 +118,11 @@ const AboutPage = () => {
             Our Journey
           </button>
           <h1 className="text-5xl md:text-6xl font-bold mb-4">
-            UMKM {' '}
-            <span className="text-yellow-400">Legowo</span>
+            UMKM <span className="text-yellow-400">Legowo</span>
           </h1>
           <p className="text-lg md:text-xl text-white/90 max-w-3xl">
-            Transforming education through innovative toys while empowering Indonesian
-            communities to thrive in the global marketplace.
+            Transforming education through innovative toys while empowering
+            Indonesian communities to thrive in the global marketplace.
           </p>
         </div>
       </section>
@@ -135,31 +139,48 @@ const AboutPage = () => {
                 <div className="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-orange-600 to-yellow-300 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <stat.icon size={28} className="text-white" />
                 </div>
-                <div className={`${fredoka.className} text-3xl font-bold bg-gradient-to-r from-orange-600 via-orange-400 via-yellow-300 via-green-400 to-white bg-clip-text text-transparent`}>{stat.value}</div>
-                <div className={`${fredoka.className} text-gray-600 text-sm font-medium`}>
+                <div
+                  className={`${fredoka.className} text-3xl font-bold bg-gradient-to-r from-orange-600 via-orange-400 via-yellow-300 via-green-400 to-white bg-clip-text text-transparent`}
+                >
+                  {stat.value}
+                </div>
+                <div
+                  className={`${fredoka.className} text-gray-600 text-sm font-medium`}
+                >
                   {stat.label}
                 </div>
-
               </div>
             ))}
           </div>
         </div>
       </section>
 
-
       {/* OUR STORY Section (Setelah Statistik) */}
       <section className="relative w-full overflow-hidden mt-0 bg-white">
         <div className="grid grid-cols-1 md:grid-cols-2 items-stretch">
           {/* Kiri: Teks */}
           <div className="flex flex-col justify-center px-8 md:px-16 py-20 z-10">
-            <h2 className={`${poppins.className} text-5xl font-bold text-[#5D2C16] mb-6`}>CERITA KAMI</h2>
-            <p className={`${fredoka.className} text-[#5D2C16] text-lg mb-4 leading-relaxed max-w-xl`}>
-              Misi kami adalah menumbuhkan imajinasi dan rasa ingin tahu anak-anak sejak usia dini melalui mainan edukatif yang ramah anak, mulai dari bayi hingga anak usia sekolah.
-              Kami juga menghadirkan produk dekorasi rumah yang estetik dan bernilai seni, buatan tangan pengrajin lokal, sebagai bentuk kontribusi dalam melestarikan budaya Indonesia.
+            <h2
+              className={`${mochiyPopOne.className} text-5xl font-bold text-[#5D2C16] mb-6`}
+            >
+              CERITA KAMI
+            </h2>
+            <p
+              className={`${fredoka.className} text-[#5D2C16] text-lg mb-4 leading-relaxed max-w-xl`}
+            >
+              Misi kami adalah menumbuhkan imajinasi dan rasa ingin tahu
+              anak-anak sejak usia dini melalui mainan edukatif yang ramah anak,
+              mulai dari bayi hingga anak usia sekolah. Kami juga menghadirkan
+              produk dekorasi rumah yang estetik dan bernilai seni, buatan
+              tangan pengrajin lokal, sebagai bentuk kontribusi dalam
+              melestarikan budaya Indonesia.
             </p>
 
-            <p className={`${fredoka.className}  text-[#5D2C16] text-lg font-semibold`}>
-              Mainan Edukatif & Dekorasi Bermakna, untuk Masa Depan Cerah Anak Indonesia.<sup>®</sup>
+            <p
+              className={`${fredoka.className}  text-[#5D2C16] text-lg font-semibold`}
+            >
+              Mainan Edukatif & Dekorasi Bermakna, untuk Masa Depan Cerah Anak
+              Indonesia.<sup>®</sup>
             </p>
           </div>
 
@@ -178,39 +199,60 @@ const AboutPage = () => {
       </section>
       {/* We Believe In Section */}
 
-      <section className=" bg-white py-0"> <div className="max-w-6xl mx-auto px-70 text-center"> <h2 className={`${poppins.className} text-3xl md:text-4xl font-bold text-blue-800 mb-12`}>WE BELIEVE IN</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {/* Item 1 */}
-          <div className="flex flex-col items-center">
-            <img
-              src="/images/s31.png"
-              alt="Open-Ended Play"
-              className="h-35 w-auto mb-6"
-            />
-            <p className={`${poppins.className} text-blue-800 font-semibold text-lg`}>Bermain Tanpa Batas</p>
-          </div>
+      <section className=" bg-white py-0">
+        {" "}
+        <div className="max-w-6xl mx-auto px-70 text-center">
+          {" "}
+          <h2
+            className={`${mochiyPopOne.className} text-3xl md:text-4xl font-bold text-blue-800 mb-12`}
+          >
+            WE BELIEVE IN
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {/* Item 1 */}
+            <div className="flex flex-col items-center">
+              <img
+                src="/images/s31.png"
+                alt="Open-Ended Play"
+                className="h-35 w-auto mb-6"
+              />
+              <p
+                className={`${mochiyPopOne.className} text-blue-800 font-semibold text-lg`}
+              >
+                Bermain Tanpa Batas
+              </p>
+            </div>
 
-          {/* Item 2 */}
-          <div className="flex flex-col items-center">
-            <img
-              src="/images/s32.png"
-              alt="Screen-Free Time"
-              className="h-35 w-auto mb-6"
-            />
-            <p className={`${poppins.className} text-blue-800 font-semibold text-lg`}>Waktu Bebas Layar</p>
-          </div>
+            {/* Item 2 */}
+            <div className="flex flex-col items-center">
+              <img
+                src="/images/s32.png"
+                alt="Screen-Free Time"
+                className="h-35 w-auto mb-6"
+              />
+              <p
+                className={`${mochiyPopOne.className} text-blue-800 font-semibold text-lg`}
+              >
+                Waktu Bebas Layar
+              </p>
+            </div>
 
-          {/* Item 3 */}
-          <div className="flex flex-col items-center">
-            <img
-              src="/images/s33.png"
-              alt="Sustainably Made Toys"
-              className="h-35 w-auto mb-6"
-            />
-            <p className={`${poppins.className} text-blue-800 font-semibold text-lg whitespace-nowrap`}>Produk Ramah Lingkungan</p>
+            {/* Item 3 */}
+            <div className="flex flex-col items-center">
+              <img
+                src="/images/s33.png"
+                alt="Sustainably Made Toys"
+                className="h-35 w-auto mb-6"
+              />
+              <p
+                className={`${mochiyPopOne.className} text-blue-800 font-semibold text-lg whitespace-nowrap`}
+              >
+                Produk Ramah Lingkungan
+              </p>
+            </div>
           </div>
         </div>
-      </div></section>
+      </section>
 
       {/* About Us Short Section */}
       <section className="bg-white py-20">
@@ -227,9 +269,20 @@ const AboutPage = () => {
 
             {/* Text Content */}
             <div>
-              <h2 className={`${poppins.className} text-2xl font-bold text-center text-[#1E3476] mb-4`}>Tentang Kami</h2>
-              <p className={`${fredoka.className} text-gray-800 text-lg leading-relaxed text-center`}>
-                Dari mainan kayu klasik hingga set bermain peran yang realistis, produk Legowo menginspirasi imajinasi dan kreativitas anak melalui permainan tanpa layar dan terbuka. Kami menciptakan mainan berkualitas tinggi dengan penuh ketelitian agar dapat diwariskan dari generasi ke generasi. Saat anak bermain dengan Legowo, segalanya menjadi mungkin!
+              <h2
+                className={`${mochiyPopOne.className} text-2xl font-bold text-center text-[#1E3476] mb-4`}
+              >
+                Tentang Kami
+              </h2>
+              <p
+                className={`${fredoka.className} text-gray-800 text-lg leading-relaxed text-center`}
+              >
+                Dari mainan kayu klasik hingga set bermain peran yang realistis,
+                produk Legowo menginspirasi imajinasi dan kreativitas anak
+                melalui permainan tanpa layar dan terbuka. Kami menciptakan
+                mainan berkualitas tinggi dengan penuh ketelitian agar dapat
+                diwariskan dari generasi ke generasi. Saat anak bermain dengan
+                Legowo, segalanya menjadi mungkin!
               </p>
             </div>
 
@@ -246,10 +299,11 @@ const AboutPage = () => {
       </section>
 
       <div className="max-w-7xl mx-auto px-4 py-16">
-
         {/* Vision & Mission */}
         <section className="-mt-16 py-0 px-6 md:px-24 bg-white text-center">
-          <h2 className={`${poppins.className} text-3xl md:text-4xl font-bold text-[#1c2957] mb-14`}>
+          <h2
+            className={`${mochiyPopOne.className} text-3xl md:text-4xl font-bold text-[#1c2957] mb-14`}
+          >
             VISI & MISI
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -262,9 +316,15 @@ const AboutPage = () => {
                   className="h-28 w-auto mb-6"
                 />
               </div>
-              <h3 className={`${poppins.className} text-xl font-semibold text-[#1c2957] mb-2`}> It’s Imaginative</h3>
+              <h3
+                className={`${mochiyPopOne.className} text-xl font-semibold text-[#1c2957] mb-2`}
+              >
+                {" "}
+                It’s Imaginative
+              </h3>
               <p className={`${fredoka.className} text-[#3e3e3e] text-base`}>
-                Menghadirkan produk yang mendorong daya imajinasi dan kreativitas anak-anak dalam bermain dan belajar.
+                Menghadirkan produk yang mendorong daya imajinasi dan
+                kreativitas anak-anak dalam bermain dan belajar.
               </p>
             </div>
 
@@ -277,9 +337,14 @@ const AboutPage = () => {
                   className="h-28 w-auto mb-6"
                 />
               </div>
-              <h3 className={`${poppins.className} text-xl font-semibold text-[#1c2957] mb-2`}>It’s Kid-Powered</h3>
+              <h3
+                className={`${mochiyPopOne.className} text-xl font-semibold text-[#1c2957] mb-2`}
+              >
+                It’s Kid-Powered
+              </h3>
               <p className={`${fredoka.className} text-[#3e3e3e] text-base`}>
-                Mengembangkan mainan dan alat edukasi yang bebas dari teknologi layar dan daya baterai.
+                Mengembangkan mainan dan alat edukasi yang bebas dari teknologi
+                layar dan daya baterai.
               </p>
             </div>
 
@@ -292,9 +357,15 @@ const AboutPage = () => {
                   className="h-28 w-auto mb-6"
                 />
               </div>
-              <h3 className={`${poppins.className} text-xl font-semibold text-[#1c2957] mb-2`}> It’s Skill Building</h3>
+              <h3
+                className={`${mochiyPopOne.className} text-xl font-semibold text-[#1c2957] mb-2`}
+              >
+                {" "}
+                It’s Skill Building
+              </h3>
               <p className={`${fredoka.className} text-[#3e3e3e] text-base`}>
-                Memberikan nilai edukatif dalam setiap produk untuk membantu anak mengembangkan kemampuan berpikir.
+                Memberikan nilai edukatif dalam setiap produk untuk membantu
+                anak mengembangkan kemampuan berpikir.
               </p>
             </div>
 
@@ -307,9 +378,14 @@ const AboutPage = () => {
                   className="h-28 w-auto mb-6"
                 />
               </div>
-              <h3 className={`${poppins.className} text-xl font-semibold text-[#1c2957] mb-2`}>It’s Fun!</h3>
+              <h3
+                className={`${mochiyPopOne.className} text-xl font-semibold text-[#1c2957] mb-2`}
+              >
+                It’s Fun!
+              </h3>
               <p className={`${fredoka.className} text-[#3e3e3e] text-base`}>
-                Membuat setiap pengalaman bermain menjadi menyenangkan, penuh warna, dan penuh kejutan.
+                Membuat setiap pengalaman bermain menjadi menyenangkan, penuh
+                warna, dan penuh kejutan.
               </p>
             </div>
           </div>
@@ -330,8 +406,8 @@ const AboutPage = () => {
                   Galeri Legowo
                 </h2>
                 <p className="text-green-800">
-                  Learn how it all started with a dream to bring imagination into
-                  children's hands.
+                  Learn how it all started with a dream to bring imagination
+                  into children's hands.
                 </p>
               </div>
             </div>
@@ -348,8 +424,8 @@ const AboutPage = () => {
                   30+ Years of Safe Toys
                 </h2>
                 <p className="text-green-800 text-sm">
-                  Since 1988, we’ve created meaningful toys that inspire hands-on,
-                  open-ended play.
+                  Since 1988, we’ve created meaningful toys that inspire
+                  hands-on, open-ended play.
                 </p>
               </div>
             </div>
