@@ -8,6 +8,7 @@ import LoadingSkeleton from "../components/LoadingSkeleton";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { ProductCard } from "../components/ProductCard";
+import { Marquee } from "@/components/marquee";
 
 const Index = () => {
   const { t, language } = useLanguage();
@@ -239,26 +240,34 @@ const Index = () => {
       {/* Featured Products Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 relative">
-          <h2 className="text-2xl md:text-3xl font-mochiyPopOne mb-4 flex flex-wrap items-center gap-2">
-            <span className="text-black">{t.featuredProducts.titlePart1}</span>
-            <span className="text-orange-500">
-              {t.featuredProducts.brandName}
-            </span>
-            <span className="text-black">{t.featuredProducts.titlePart2}</span>
-            <span className="text-green-600">
-              {t.featuredProducts.highlight}
-            </span>{" "}
-            <span className="text-black">{t.featuredProducts.punctuation}</span>
-            <span className="text-orange-500">
-              {t.featuredProducts.titlePart3}
-            </span>
+          <h2 className="text-2xl md:text-3xl font-mochiyPopOne mb-4 flex flex-wrap items-center gap-2 whitespace-nowrap ">
+            <div className="max-w-1/2 flex flex-wrap items-center gap-2 whitespace-nowrap ">
+              <span className="text-black">
+                {t.featuredProducts.titlePart1}
+              </span>
+              <span className="text-orange-500">
+                {t.featuredProducts.brandName}
+              </span>
+              <span className="text-black">
+                {t.featuredProducts.titlePart2}
+              </span>
+              <span className="text-green-600">
+                {t.featuredProducts.highlight}
+              </span>{" "}
+              <span className="text-black">
+                {t.featuredProducts.punctuation}
+              </span>
+              <span className="text-orange-500">
+                {t.featuredProducts.titlePart3}
+              </span>
+            </div>
           </h2>
 
           {/* <p className="text-lg text-gray-600 text-center mb-10">
             {t.featuredProducts.description}
           </p> */}
-          
-           {/* PRODUCT CARD */}   
+
+          {/* PRODUCT CARD */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
@@ -272,7 +281,7 @@ const Index = () => {
           <button className="absolute top-1/2 -right-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition">
             <ArrowRight className="h-6 w-6 text-gray-700" />
           </button> */}
-          
+
           {/* BUTTON VIEW ALL */}
           {/* <div className="text-center mt-12">
             <Link
@@ -284,6 +293,17 @@ const Index = () => {
           </div> */}
         </div>
       </section>
+
+      {/* Marquee Section */}
+      <div className="w-full bg-gray-100 py-12">
+        <span className="flex justify-center mb-3">
+            <h2 className="mx-12 text-center font-bold font-plusJakartaSans text-black/60 ">Our brand trusted partners</h2>
+        </span>
+        <Marquee className="text-3xl font-bold font-mochiyPopOne  text-orange-500/10 [--gap:5rem] [--duration:18s] flex justify-center">
+          <span className="mx-12">Legowo</span>
+          <span className="mx-12">Propan</span>
+        </Marquee>
+      </div>
 
       {/* Why Choose Us Section */}
       <section className="bg-gray-50 py-20">
