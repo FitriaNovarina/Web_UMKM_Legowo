@@ -1,34 +1,17 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-// import { products } from '@/data/products';
-import { ArrowRight, Leaf, Award, Heart, Users } from "lucide-react";
+import { ArrowRight, Leaf, Award, Heart, Users, ArrowLeft } from "lucide-react";
 import Link from "next/link";
-// import ProductCard from '@/components/ProductCard';
-import TestimonialsSection from "@/components/TestimonialsSection";
-import LoadingSkeleton from "@/components/LoadingSkeleton";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-// import QuickViewModal from '@/components/QuickViewModal';
-import { Mochiy_Pop_One, Plus_Jakarta_Sans } from "next/font/google";
-
-const mochiyPopOne = Mochiy_Pop_One({
-  subsets: ["latin"],
-  weight: ["400"],
-});
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
+import TestimonialsSection from "../components/TestimonialsSection";
+import LoadingSkeleton from "../components/LoadingSkeleton";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import ProductCard from "../components/ProductCard";
 
 const Index = () => {
-  const { t } = useLanguage();
-  const [animatedElements, setAnimatedElements] = useState<Set<string>>(
-    new Set()
-  );
+  const { t, language } = useLanguage();
   const [isLoading, setIsLoading] = useState(true);
-  // const [quickViewProduct, setQuickViewProduct] = useState<any>(null);
-  // const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
 
   useEffect(() => {
     // Simulate loading
@@ -39,51 +22,34 @@ const Index = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setAnimatedElements((prev) => new Set(prev).add(entry.target.id));
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = document.querySelectorAll("[data-animate]");
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, [isLoading]);
-
-  // const handleQuickView = (product: any) => {
-  //   setQuickViewProduct(product);
-  //   setIsQuickViewOpen(true);
-  // };
-
-  // const featuredProducts = products.slice(0, 3);
-  const categories = [
+  const featuredProducts = [
     {
-      id: "home-decor",
-      name: t.categories.homeDecor,
-      image:
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop",
-      count: "15+ Products",
+      id: "1",
+      name: "Smart Learning Bricks",
+      category: "Arabella",
+      image: "/images/s31.png",
+      price: "Rp 150.000",
     },
     {
-      id: "educational-toys",
-      name: t.categories.educationalToys,
-      image:
-        "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=300&fit=crop",
-      count: "12+ Products",
+      id: "2",
+      name: "Wooden Busy Board House",
+      category: "Deuter",
+      image: "/images/s32.png",
+      price: "Rp 250.000",
     },
     {
-      id: "furniture",
-      name: t.categories.furniture,
-      image:
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop",
-      count: "8+ Products",
+      id: "3",
+      name: "Wooden Geometric Shapes",
+      category: "Geometrical Blocks",
+      image: "/images/s33.png",
+      price: "Rp 180.000",
+    },
+    {
+      id: "4",
+      name: "Wooden Jigsaw Puzzle",
+      category: "Deuter",
+      image: "/images/s31.png",
+      price: "Rp 120.000",
     },
   ];
 
@@ -154,10 +120,10 @@ const Index = () => {
         </div>
 
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4 py-20">
-          <h1 className="font-mochiyPopOne text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 animate-fade-in">
+          <h1 className=" justify-around font-mochiyPopOne text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-6 animate-fade-in">
             {t.hero.title}
           </h1>
-          <p className="font-inter text-lg md:text-xl lg:text-2xl text-white/90 mb-8 animate-fade-in animation-delay-300 max-w-2xl mx-auto">
+          <p className="font-inter text-sm md:text-md lg:text-lg text-white/90 mb-8 animate-fade-in animation-delay-300 max-w-2xl mx-auto">
             UMKM Legowo adalah pengrajin lokal yang menghadirkan berbagai produk
             edukatif dan furnitur anak-anak dari kayu — mulai dari APE Indoor,
             APE Outdoor, Meja Kursi Anak, Stand Usaha, hingga Rak Buku.
@@ -186,7 +152,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-50 text-center">
           <h2 className="text-3xl font-mochiyPopOne md:text-4xl font-bold text-gray-900 mb-4">
             FUN FOR{" "}
-            <span className="font-mochiyPopOne text-indigo-700">ALL AGES</span>
+            <span className="font-mochiyPopOne text-orange-500">ALL AGES</span>
           </h2>
           <p className="text-base md:text-lg text-gray-700 mb-10">
             Toys for kids of every age, stage, and ability!
@@ -272,26 +238,32 @@ const Index = () => {
       </section>
       {/* Featured Products Section */}
       <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 relative">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-2">
             {t.featuredProducts.title}
           </h2>
           <p className="text-lg text-gray-600 text-center mb-10">
             {t.featuredProducts.description}
           </p>
-          {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProducts.map(product => (
-              <ProductCard 
-                key={product.id} 
-                product={product} 
-                onQuickView={handleQuickView}
-              />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {featuredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
             ))}
-          </div> */}
+          </div>
+
+          {/* Navigation Arrows */}
+          <button className="absolute top-1/2 -left-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition">
+            <ArrowLeft className="h-6 w-6 text-gray-700" />
+          </button>
+          <button className="absolute top-1/2 -right-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition">
+            <ArrowRight className="h-6 w-6 text-gray-700" />
+          </button>
+
           <div className="text-center mt-12">
             <Link
               href="/products"
-              className="bg-blue-600 text-white font-semibold px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+              className="bg-orange-500 text-white font-semibold px-8 py-3 rounded-full hover:bg-orange-600 transition-colors shadow-lg hover:shadow-xl"
             >
               {t.featuredProducts.viewAll}
             </Link>
@@ -330,10 +302,10 @@ const Index = () => {
                   </div>
                   <div className="ml-4">
                     <h4 className="text-lg font-semibold text-gray-800">
-                      {t.language === "en" ? value.title : value.titleId}
+                      {language === "en" ? value.title : value.titleId}
                     </h4>
                     <p className="text-gray-600">
-                      {t.language === "en" ? value.desc : value.descId}
+                      {language === "en" ? value.desc : value.descId}
                     </p>
                   </div>
                 </li>
@@ -360,13 +332,6 @@ const Index = () => {
           </Link>
         </div>
       </section>
-
-      {/* Quick View Modal */}
-      {/* <QuickViewModal
-        isOpen={isQuickViewOpen}
-        onClose={() => setIsQuickViewOpen(false)}
-        product={quickViewProduct}
-      /> */}
 
       <Footer />
     </div>

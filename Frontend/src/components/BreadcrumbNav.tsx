@@ -1,14 +1,15 @@
-
+"use client";
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ChevronRight, Home } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const BreadcrumbNav: React.FC = () => {
-  const location = useLocation();
+  const location = usePathname();
   const { t } = useLanguage();
   
-  const pathnames = location.pathname.split('/').filter((x) => x);
+  const pathnames = location.split('/').filter((x) => x);
   
   if (pathnames.length === 0) return null;
 
@@ -24,7 +25,7 @@ const BreadcrumbNav: React.FC = () => {
         <ol className="flex items-center space-x-2 text-sm">
           <li>
             <Link 
-              to="/" 
+              href="/" 
               className="flex items-center text-gray-600 hover:text-wood-600 transition-colors duration-200"
             >
               <Home size={16} />
@@ -46,7 +47,7 @@ const BreadcrumbNav: React.FC = () => {
                   <span className="text-wood-700 font-medium">{displayName}</span>
                 ) : (
                   <Link 
-                    to={routeTo}
+                    href={routeTo}
                     className="text-gray-600 hover:text-wood-600 transition-colors duration-200"
                   >
                     {displayName}
