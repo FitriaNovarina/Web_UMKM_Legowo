@@ -7,7 +7,7 @@ import TestimonialsSection from "../components/TestimonialsSection";
 import LoadingSkeleton from "../components/LoadingSkeleton";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import ProductCard from "../components/ProductCard";
+import { ProductCard } from "../components/ProductCard";
 
 const Index = () => {
   const { t, language } = useLanguage();
@@ -239,13 +239,26 @@ const Index = () => {
       {/* Featured Products Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 relative">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-2">
-            {t.featuredProducts.title}
+          <h2 className="text-2xl md:text-3xl font-mochiyPopOne mb-4 flex flex-wrap items-center gap-2">
+            <span className="text-black">{t.featuredProducts.titlePart1}</span>
+            <span className="text-orange-500">
+              {t.featuredProducts.brandName}
+            </span>
+            <span className="text-black">{t.featuredProducts.titlePart2}</span>
+            <span className="text-green-600">
+              {t.featuredProducts.highlight}
+            </span>{" "}
+            <span className="text-black">{t.featuredProducts.punctuation}</span>
+            <span className="text-orange-500">
+              {t.featuredProducts.titlePart3}
+            </span>
           </h2>
-          <p className="text-lg text-gray-600 text-center mb-10">
-            {t.featuredProducts.description}
-          </p>
 
+          {/* <p className="text-lg text-gray-600 text-center mb-10">
+            {t.featuredProducts.description}
+          </p> */}
+          
+           {/* PRODUCT CARD */}   
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
@@ -253,21 +266,22 @@ const Index = () => {
           </div>
 
           {/* Navigation Arrows */}
-          <button className="absolute top-1/2 -left-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition">
+          {/* <button className="absolute top-1/2 -left-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition">
             <ArrowLeft className="h-6 w-6 text-gray-700" />
           </button>
           <button className="absolute top-1/2 -right-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition">
             <ArrowRight className="h-6 w-6 text-gray-700" />
-          </button>
-
-          <div className="text-center mt-12">
+          </button> */}
+          
+          {/* BUTTON VIEW ALL */}
+          {/* <div className="text-center mt-12">
             <Link
               href="/products"
               className="bg-orange-500 text-white font-semibold px-8 py-3 rounded-full hover:bg-orange-600 transition-colors shadow-lg hover:shadow-xl"
             >
               {t.featuredProducts.viewAll}
             </Link>
-          </div>
+          </div> */}
         </div>
       </section>
 
