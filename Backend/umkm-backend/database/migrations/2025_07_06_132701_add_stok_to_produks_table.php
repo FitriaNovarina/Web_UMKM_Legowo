@@ -12,7 +12,7 @@ return new class extends Migration
    public function up()
 {
     Schema::table('produks', function (Blueprint $table) {
-        $table->integer('stok')->default(0);
+        // $table->integer('stok')->default(0);
         $table->enum('status', ['PO', 'Ready'])->default('Ready');
     });
 }
