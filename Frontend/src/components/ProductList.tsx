@@ -22,7 +22,13 @@ export default function ProductList() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('http://127.0.0.1:8000/api/produk')
+        const kategori = 'Semua' // bisa diganti via button click nanti
+
+        const url = kategori === 'Semua'
+          ? '/api/produk' // Tanpa query param
+          : `/api/produk?kategori=${encodeURIComponent(kategori)}`
+
+        const res = await fetch(url)
         const data = await res.json()
         setProducts(data)
         setLoading(false)

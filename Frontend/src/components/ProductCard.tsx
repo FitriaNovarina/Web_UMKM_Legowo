@@ -83,11 +83,11 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
             {productName}
           </h3>
           
-          <div className="mb-2">
+          {/* <div className="mb-2">
             <span className="inline-block bg-wood-100 text-wood-800 text-xs px-2 py-1 rounded-full mb-2">
               {product.category}
             </span>
-          </div>
+          </div> */}
           
           <div className="space-y-2 mb-3">
             <div className="flex items-center">
