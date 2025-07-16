@@ -2,7 +2,6 @@
 
 // app/Http/Controllers/Api/ProdukController.php
 namespace App\Http\Controllers\Api;
-
 use App\Models\Produk;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
