@@ -70,7 +70,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
       <div className="group relative aspect-square overflow-hidden">
         <Image
           src={product.images?.[0] || "/images/logonav.png"}
-          alt={productName}
+          alt={productName || "tes"}
           fill
           className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
         />
