@@ -82,19 +82,47 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
           <h3 className="font-playfair mb-2 text-lg font-semibold text-wood-800 line-clamp-2">
             {productName}
           </h3>
-
-          <p className="mb-3 text-sm text-wood-600 line-clamp-2">
+          
+          <div className="mb-2">
+            <span className="inline-block bg-wood-100 text-wood-800 text-xs px-2 py-1 rounded-full mb-2">
+              {product.category}
+            </span>
+          </div>
+          
+          <div className="space-y-2 mb-3">
+            <div className="flex items-center">
+              <span className="text-wood-700 font-medium">
+                {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(product.price)}
+              </span>
+            </div>
+            
+            <div className="flex items-center text-sm text-wood-600">
+              <span className="mr-2">Stock:</span>
+              <span className={`font-medium ${product.inStock ? 'text-green-600' : 'text-red-600'}`}>
+                {product.inStock ? 'Available' : 'Out of Stock'}
+              </span>
+            </div>
+            
+            {product.featured && (
+              <div className="text-xs text-amber-600 font-medium">
+                Featured Product
+              </div>
+            )}
+          </div>
+          
+          <p className="text-sm text-wood-600 line-clamp-3 mt-2">
             {productDescription}
           </p>
         </div>
 
         <div className="mt-auto pt-4">
-          <div className="flex items-center justify-between">
-            <div className="space-y-1"></div>
-          </div>
           <div className="mt-4 flex justify-center">
             <div>
-              <GetStartedButton className="tes" text="Get Startded" />
+              <GetStartedButton 
+                className={`${!product.inStock ? 'opacity-50 cursor-not-allowed' : ''}`} 
+                text={product.inStock ? 'Get Started' : 'Out of Stock'}
+                disabled={!product.inStock}
+              />
             </div>
           </div>
         </div>
