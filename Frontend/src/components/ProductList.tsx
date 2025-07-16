@@ -15,20 +15,22 @@ interface APIProduct {
   gambar: string
 }
 
-export default function ProductList() {
+interface ProductListProps {
+  selectedCategory?: string;
+}
+
+export default function ProductList({ selectedCategory }: ProductListProps) {
   const [products, setProducts] = useState<APIProduct[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const kategori = 'Semua' // bisa diganti via button click nanti
+        const url = selectedCategory && selectedCategory !== 'Semua'
+          ? `/api/produk?kategori=${encodeURIComponent(selectedCategory)}`
+          : '/api/produk';
 
-        const url = kategori === 'Semua'
-          ? '/api/produk' // Tanpa query param
-          : `/api/produk?kategori=${encodeURIComponent(kategori)}`
-
-        const res = await fetch(url)
+        const res = await fetch(url, { cache: 'no-store' })
         const data = await res.json()
         setProducts(data)
         setLoading(false)
@@ -38,7 +40,7 @@ export default function ProductList() {
     }
 
     fetchData()
-  }, [])
+  }, [selectedCategory])
 
   if (loading) return <p>Loading katalog produk...</p>
 
