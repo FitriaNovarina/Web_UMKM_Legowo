@@ -8,7 +8,7 @@ interface IGetStartedButtonProps {
 }
 
 export default function GetStartedButton({
-  text = "Get started",
+  text = "Dapatkan Sekarang",
   className,
 }: IGetStartedButtonProps) {
   return (

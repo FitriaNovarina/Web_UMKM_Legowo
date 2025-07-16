@@ -17,8 +17,8 @@ export default function ProductsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   
-  // Get selected category from filters (first non-"Semua" filter)
-  const selectedCategory = filters.find(filter => filter !== "Semua");
+  // Get the selected category (either the single selected category or undefined if "Semua" is selected)
+  const selectedCategory = filters.includes("Semua") || filters.length === 0 ? undefined : filters[0];
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -155,31 +155,22 @@ export default function ProductsPage() {
                 <>
                   <label className="flex items-center mt-2">
                     <input
-                      type="checkbox"
+                      type="radio"
+                      name="category"
                       className="accent-amber-500 mr-2"
-                      checked={filters.includes("Semua") || filters.length === 0}
-                      onChange={() => {
-                        setFilters(["Semua"]);
-                      }}
+                      checked={filters.length === 0 || filters.includes("Semua")}
+                      onChange={() => setFilters(["Semua"])}
                     />
                     Semua
                   </label>
                   {categories.map((category) => (
                     <label key={category.id} className="flex items-center mt-2">
                       <input
-                        type="checkbox"
+                        type="radio"
+                        name="category"
                         className="accent-amber-500 mr-2"
-                        checked={filters.includes(category.name)}
-                        onChange={() => {
-                          setFilters(prev => {
-                            const newFilters = prev.includes(category.name)
-                              ? prev.filter(f => f !== category.name)
-                              : [...prev.filter(f => f !== "Semua"), category.name];
-                            
-                            // If no filters left, default to "Semua"
-                            return newFilters.length > 0 ? newFilters : ["Semua"];
-                          });
-                        }}
+                        checked={filters[0] === category.name}
+                        onChange={() => setFilters([category.name])}
                       />
                       {category.name}
                     </label>
