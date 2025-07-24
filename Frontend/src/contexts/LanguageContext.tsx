@@ -112,7 +112,7 @@ const translations = {
       contact: "Kontak",
     },
     hero: {
-      title: "Menciptakan Kenyamanan. Mendefinisikan Ulang Ruang.",
+      title: "Legowo - Mainan Edukatif",
       subtitle:
         "Dekorasi rumah kayu dan mainan edukatif buatan tangan yang menghadirkan kehangatan dan karakter pada ruang hidup Anda.",
       cta: "Jelajahi Katalog Kami",

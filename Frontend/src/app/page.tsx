@@ -127,7 +127,7 @@ const Index = () => {
           <p className="font-inter text-sm md:text-md lg:text-lg text-white/90 mb-8 animate-fade-in animation-delay-300 max-w-2xl mx-auto">
             UMKM Legowo adalah pengrajin lokal yang menghadirkan berbagai produk
             edukatif dan furnitur anak-anak dari kayu — mulai dari APE Indoor,
-            APE Outdoor, Meja Kursi Anak, Stand Usaha, hingga Rak Buku.
+            APE Outdoor, Meja Kursi Anak, Stand Usaha, hingga Rak Buku dan meja.
           </p>
           <Link
             href="/products"
@@ -332,7 +332,7 @@ const Index = () => {
               {values.map((value, index) => (
                 <li key={index} className="flex items-start">
                   <div className="flex-shrink-0">
-                    <value.icon className="w-6 h-6 text-blue-600" />
+                    <value.icon className="w-6 h-6 text-orange-500" />
                   </div>
                   <div className="ml-4">
                     <h4 className="text-lg font-semibold text-gray-800">
@@ -352,7 +352,7 @@ const Index = () => {
       <TestimonialsSection />
 
       {/* Call to Action */}
-      <section className="bg-blue-600 text-white">
+      <section className="bg-orange-500 text-white">
         <div className="max-w-7xl mx-auto px-4 py-16 text-center">
           <h2 className="text-3xl font-bold mb-4">{t.cta.title}</h2>
           <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
@@ -360,7 +360,7 @@ const Index = () => {
           </p>
           <Link
             href="/contact"
-            className="bg-white text-blue-600 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors"
+            className="bg-white text-orange-500 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors"
           >
             {t.cta.button}
           </Link>

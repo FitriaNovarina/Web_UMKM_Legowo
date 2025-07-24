@@ -46,7 +46,7 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-4xl max-h-[95vh] overflow-y-auto p-4 md:p-6">
+      <DialogContent className="sm:max-w-sm md:max-w-2xl lg:max-w-4xl max-h-[95vh] mt-10 overflow-y-auto p-4 md:p-6">
         <DialogHeader>
           <DialogTitle className="font-playfair text-2xl text-wood-800">
             {productName}

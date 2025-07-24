@@ -44,9 +44,16 @@ export default function ProductList({ selectedCategory }: ProductListProps) {
 
   if (loading) return <p>Loading katalog produk...</p>
 
+  // Ensure products is always an array
+  const productList = Array.isArray(products) ? products : [];
+
+  if (productList.length === 0) {
+    return <p className="text-center py-8">Tidak ada produk yang tersedia</p>;
+  }
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      {products.map((product, index) => {
+      {productList.map((product, index) => {
         const mapped: ProductCardType = {
           id: String(product.id),
           name_id: product.nama,

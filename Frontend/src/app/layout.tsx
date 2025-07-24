@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import {
-  Geist,
-  Geist_Mono,
   Mochiy_Pop_One,
   Plus_Jakarta_Sans,
 } from "next/font/google";
@@ -10,15 +8,7 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import BackToTop from "@/components/BackToTop";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const mochiyPopOne = Mochiy_Pop_One({
   variable: "--font-mochiy-pop-one",
@@ -45,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${mochiyPopOne.variable} ${plusJakartaSans.variable} antialiased`}
+        className={`${mochiyPopOne.variable} ${plusJakartaSans.variable} antialiased`}
       >
         <LanguageProvider>
           {children}
