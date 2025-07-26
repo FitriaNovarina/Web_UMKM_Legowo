@@ -93,11 +93,10 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
                   <button
                     key={index}
                     onClick={() => setCurrentImageIndex(index)}
-                    className={`shrink-0 w-16 h-16 rounded-md overflow-hidden border-2 transition-all duration-300 hover:scale-105 ${
-                      index === currentImageIndex
-                        ? "border-amber-500 ring-2 ring-amber-300"
-                        : "border-wood-200 hover:border-wood-400"
-                    }`}
+                    className={`shrink-0 w-16 h-16 rounded-md overflow-hidden border-2 transition-all duration-300 hover:scale-105 ${index === currentImageIndex
+                      ? "border-amber-500 ring-2 ring-amber-300"
+                      : "border-wood-200 hover:border-wood-400"
+                      }`}
                   >
                     <Image
                       src={image || "/images/logonav.png"}
@@ -175,6 +174,23 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
               <MessageCircle className="h-5 w-5 group-hover:animate-bounce" />
               Pesan via WhatsApp
             </Button>
+            <Button
+              onClick={() => window.open('https://shopee.co.id/nama-toko-anda', '_blank')}
+              className="w-full gap-2 bg-orange-500 hover:bg-orange-600 text-white transition-all duration-300 hover:scale-105 active:scale-95 group"
+              size="lg"
+            >
+              <img src="/images/shopee.png" alt="Shopee" className="h-5 w-5 group-hover:animate-bounce" />
+              Pesan via Shopee
+            </Button>
+            <Button
+              onClick={() => window.open('https://www.etsy.com/shop/nama-toko-anda', '_blank')}
+              className="w-full gap-2 bg-pink-500 hover:bg-pink-600 text-white transition-all duration-300 hover:scale-105 active:scale-95 group"
+              size="lg"
+            >
+              <img src="/images/etzy.png" alt="Etsy" className="h-20 w-20 group-hover:animate-bounce" />
+              Pesan via Etsy
+            </Button>
+
           </div>
         </div>
       </DialogContent>

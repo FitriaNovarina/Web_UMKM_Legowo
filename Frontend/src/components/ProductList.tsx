@@ -1,4 +1,3 @@
-// app/components/ProductList.tsx
 'use client'
 
 import { useEffect, useState } from 'react'
@@ -17,9 +16,10 @@ interface APIProduct {
 
 interface ProductListProps {
   selectedCategory?: string;
+  sortOption?: string;
 }
 
-export default function ProductList({ selectedCategory }: ProductListProps) {
+export default function ProductList({ selectedCategory, sortOption }: ProductListProps) {
   const [products, setProducts] = useState<APIProduct[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -36,6 +36,7 @@ export default function ProductList({ selectedCategory }: ProductListProps) {
         setLoading(false)
       } catch (error) {
         console.error('Gagal fetch produk:', error)
+        setLoading(false)
       }
     }
 
@@ -44,16 +45,25 @@ export default function ProductList({ selectedCategory }: ProductListProps) {
 
   if (loading) return <p>Loading katalog produk...</p>
 
-  // Ensure products is always an array
-  const productList = Array.isArray(products) ? products : [];
+  let sortedProducts = [...products]
 
-  if (productList.length === 0) {
+  if (sortOption === 'harga_asc') {
+    sortedProducts.sort((a, b) => a.harga - b.harga)
+  } else if (sortOption === 'harga_desc') {
+    sortedProducts.sort((a, b) => b.harga - a.harga)
+  } else if (sortOption === 'nama_asc') {
+    sortedProducts.sort((a, b) => a.nama.localeCompare(b.nama))
+  } else if (sortOption === 'nama_desc') {
+    sortedProducts.sort((a, b) => b.nama.localeCompare(a.nama))
+  }
+
+  if (sortedProducts.length === 0) {
     return <p className="text-center py-8">Tidak ada produk yang tersedia</p>;
   }
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      {productList.map((product, index) => {
+      {sortedProducts.map((product, index) => {
         const mapped: ProductCardType = {
           id: String(product.id),
           name_id: product.nama,

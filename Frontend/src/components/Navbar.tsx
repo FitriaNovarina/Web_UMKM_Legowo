@@ -69,70 +69,65 @@ const Navbar = () => {
             <span
               className={`${fredoka.className} text-4xl font-bold text-white mb-2`}
             >
-              Legowo
+              Zyifini Edukasi
             </span>
           </Link>
 
           {/* Search + Category Dropdown */}
           <div
-            className={`hidden md:flex items-center w-[40%] rounded-full ${
-              isScrolled
-                ? "bg-white/10 backdrop-blur-md shadow-md border border-transparent"
-                : "bg-transparent backdrop-blur-0 shadow-none border-[1px] border-white/90"
-            }`}
+            className={`hidden md:flex items-center w-[40%] rounded-full ${isScrolled
+              ? "bg-white/10 backdrop-blur-md shadow-md border border-transparent"
+              : "bg-transparent backdrop-blur-0 shadow-none border-[1px] border-white/90"
+              }`}
           >
             {/* All Categories Button */}
             <div className="relative">
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className={`flex items-center h-full px-3 py-2 rounded-l-full font-semibold transition-all duration-300 ${
-                  fredoka.className
-                } ${
-                  isScrolled
+                className={`flex items-center h-full px-3 py-2 rounded-l-full font-semibold transition-all duration-300 ${fredoka.className
+                  } ${isScrolled
                     ? "bg-white text-amber-800 border border-white"
                     : "bg-transparent text-white border border-transparent"
-                }`}
+                  }`}
               >
                 All Categories <ChevronDown size={16} className="ml-1" />
               </button>
 
+              {/* Dropdown Kategori - Tanpa Slug */}
               {isDropdownOpen && (
                 <div className="absolute top-12 left-0 bg-white text-black rounded-lg shadow-lg py-4 px-6 z-50 w-[600px] grid grid-cols-3 gap-6">
                   {[
                     {
                       title: "APE Indoor",
-                      slug: "ape-indoor",
                       image: "/images/apeindoor.png",
                     },
                     {
                       title: "APE Outdoor",
-                      slug: "ape-outdoor",
                       image: "/images/apeoutdoor.png",
                     },
                     {
-                      title: "Meja Kursi",
-                      slug: "meja-kursi",
+                      title: "Kursi Meja",
                       image: "/images/mejakursi.jpg",
                     },
                     {
                       title: "Stand Usaha",
-                      slug: "stand-usaha",
                       image: "/images/standusaha.jpg",
                     },
                     {
                       title: "Rak Buku",
-                      slug: "rak-buku",
                       image: "/images/rakbuku.png",
                     },
                     {
                       title: "Papan Data",
-                      slug: "papan-data",
                       image: "/images/papandata.png",
                     },
                   ].map((item) => (
                     <Link
-                      key={item.slug}
-                      href={`/category/${item.slug}`}
+                      key={item.title}
+                      href={{
+                        pathname: "/products",
+                        query: { kategori: item.title },
+                      }}
                       className="flex flex-col items-center hover:bg-gray-100 rounded-md p-3 transition"
                       onClick={() => setIsDropdownOpen(false)}
                     >
@@ -150,6 +145,7 @@ const Navbar = () => {
                   ))}
                 </div>
               )}
+
             </div>
 
             {/* Search Input */}

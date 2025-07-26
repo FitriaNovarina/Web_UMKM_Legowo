@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { X, Loader2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -12,64 +13,71 @@ interface Category {
 }
 
 export default function ProductsPage() {
+  const searchParams = useSearchParams();
+  const categoryFromURL = searchParams.get("kategori");
+
+
   const [filters, setFilters] = useState<string[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  
-  // Get the selected category (either the single selected category or undefined if "Semua" is selected)
-  const selectedCategory = filters.includes("Semua") || filters.length === 0 ? undefined : filters[0];
+  const [sortOption, setSortOption] = useState<string>('name_asc');
+
+
+  // Set default selected category from URL (only once on first mount)
+  useEffect(() => {
+    if (categoryFromURL) {
+      setFilters([categoryFromURL]);
+    } else {
+      setFilters(["All"]);
+    }
+  }, [categoryFromURL]);
+
+  // Get the selected category
+  const selectedCategory =
+    filters.includes("All") || filters.length === 0 ? undefined : filters[0];
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        console.log('Fetching categories from:', '/api/kategori');
-        const response = await fetch('/api/kategori', {
+        console.log("Fetching categories from:", "/api/kategori");
+        const response = await fetch("/api/kategori", {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
-          cache: 'no-store' // Prevent caching issues
+          cache: "no-store", // Prevent caching issues
         });
-        
-        console.log('Response status:', response.status);
-        
+
+        console.log("Response status:", response.status);
+
         if (!response.ok) {
           const errorText = await response.text();
-          console.error('Error response:', errorText);
+          console.error("Error response:", errorText);
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
+
         const data = await response.json();
-        console.log('Received categories data:', data);
-        
-        // Handle different possible response formats
+        console.log("Received categories data:", data);
+
         if (Array.isArray(data)) {
-          // If it's an array of strings
-          if (typeof data[0] === 'string') {
+          if (typeof data[0] === "string") {
             setCategories(data.map((name, id) => ({ id, name })));
-          } 
-          // If it's an array of objects with name property
-          else if (data[0] && typeof data[0] === 'object' && 'name' in data[0]) {
+          } else if (data[0] && typeof data[0] === "object" && "name" in data[0]) {
             setCategories(data);
           } else {
-            throw new Error('Unexpected category format in array');
+            throw new Error("Unexpected category format in array");
           }
-        } 
-        // If it's an object with a data property that's an array
-        else if (data && Array.isArray(data.data)) {
+        } else if (data && Array.isArray(data.data)) {
           setCategories(data.data);
-        }
-        // If it's an object with a categories property that's an array
-        else if (data && Array.isArray(data.categories)) {
+        } else if (data && Array.isArray(data.categories)) {
           setCategories(data.categories);
-        }
-        else {
-          console.error('Unexpected categories format:', data);
-          throw new Error('Invalid categories format received from API');
+        } else {
+          console.error("Unexpected categories format:", data);
+          throw new Error("Invalid categories format received from API");
         }
       } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
-        console.error('Error in fetchCategories:', errorMessage);
+        const errorMessage = err instanceof Error ? err.message : "Unknown error occurred";
+        console.error("Error in fetchCategories:", errorMessage);
         setError(`Failed to load categories: ${errorMessage}`);
       } finally {
         setIsLoading(false);
@@ -84,8 +92,6 @@ export default function ProductsPage() {
   };
 
   const clearAll = () => setFilters([]);
-
-
 
   return (
     <div className="text-gray-800 bg-gray-50 min-h-screen flex flex-col">
@@ -126,14 +132,12 @@ export default function ProductsPage() {
               </div>
             )}
 
-            {/* Availability and Price filters removed - will be implemented later */}
-
             {/* Category Filter */}
             <div className="bg-red-100 p-4 rounded-2xl">
               <div className="flex justify-between items-center mb-3">
                 <h3 className="text-lg font-bold">Category</h3>
-                <button 
-                  onClick={() => window.location.reload()} 
+                <button
+                  onClick={() => window.location.reload()}
                   className="text-sm text-amber-700 hover:underline"
                 >
                   Refresh
@@ -158,10 +162,10 @@ export default function ProductsPage() {
                       type="radio"
                       name="category"
                       className="accent-amber-500 mr-2"
-                      checked={filters.length === 0 || filters.includes("Semua")}
-                      onChange={() => setFilters(["Semua"])}
+                      checked={filters.length === 0 || filters.includes("All")}
+                      onChange={() => setFilters(["All"])}
                     />
-                    Semua
+                    All
                   </label>
                   {categories.map((category) => (
                     <label key={category.id} className="flex items-center mt-2">
@@ -184,32 +188,29 @@ export default function ProductsPage() {
           <main className="lg:col-span-3 space-y-6">
             <div className="flex flex-wrap justify-between items-center bg-red-100 px-6 py-4 rounded-2xl">
               <p className="text-md text-gray-800 font-semibold">
-                {/* TODO: Show accurate product count after implementing pagination */}
                 Showing Products
               </p>
               <div className="flex space-x-2 items-center">
                 <span className="ml-4 text-gray-700 font-semibold">
                   Sort by:
                 </span>
-                <select className="ml-2 p-1">
-                  <option value="name_asc">Alphabetically, A–Z</option>
-                  <option value="name_desc">Alphabetically, Z–A</option>
-                  <option value="price_asc">Price: Low to High</option>
-                  <option value="price_desc">Price: High to Low</option>
+                <select onChange={(e) => setSortOption(e.target.value)}>
+                  <option value="harga_asc">Price: Low to High</option>
+                  <option value="harga_desc">Price: High to Low</option>
+                  <option value="nama_asc">Alphabetically, A–Z</option>
+                  <option value="nama_desc">Alphabetically, Z–A</option>
                 </select>
+
               </div>
             </div>
 
-            <ProductList selectedCategory={selectedCategory} />
+            <ProductList selectedCategory={selectedCategory} sortOption={sortOption} />
 
-            {/* Pagination will be handled by ProductList component */}
           </main>
         </div>
       </div>
 
       <Footer />
-
-
     </div>
   );
 }

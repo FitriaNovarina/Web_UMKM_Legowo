@@ -20,11 +20,12 @@ class ProdukController extends Controller
         $kategori = $request->query('kategori');
 
         $validKategori = [
-            'ape INDOOR',
-            'ape outdoor',
-            'kursi meja',
-            'papan data',
-            'rak buku',
+            'APE Indoor',
+            'APE Outdoor',
+            'Kursi Meja',
+            'Papan Data',
+            'Rak Buku',
+            'Stand Usaha',
         ];
 
 
@@ -43,12 +44,13 @@ class ProdukController extends Controller
     public function kategori()
 {
     return response()->json([
-        'ape INDOOR',
-        'ape outdoor',
-        'kursi meja',
-        'papan data',
-        'rak buku',
-        
+        'APE Indoor',
+            'APE Outdoor',
+            'Kursi Meja',
+            'Papan Data',
+            'Rak Buku',
+            'Stand Usaha'
+
     ]);
 }
 

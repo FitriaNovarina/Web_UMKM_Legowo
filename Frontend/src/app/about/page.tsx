@@ -118,7 +118,7 @@ const AboutPage = () => {
             Our Journey
           </button>
           <h1 className="text-5xl md:text-6xl font-bold mb-4">
-            UMKM <span className="text-yellow-400">Legowo</span>
+            Zyifini <span className="text-yellow-400">Edukasi</span>
           </h1>
           <p className="text-lg md:text-xl text-white/90 max-w-3xl">
             Transforming education through innovative toys while empowering
@@ -161,12 +161,12 @@ const AboutPage = () => {
           {/* Kiri: Teks */}
           <div className="flex flex-col justify-center px-8 md:px-16 py-20 z-10">
             <h2
-              className={`${mochiyPopOne.className} text-5xl font-bold text-[#5D2C16] mb-6`}
+              className={`${mochiyPopOne.className} text-5xl font-bold text-[#1c2957] mb-6`}
             >
               CERITA KAMI
             </h2>
             <p
-              className={`${fredoka.className} text-[#5D2C16] text-lg mb-4 leading-relaxed max-w-xl`}
+              className={`${fredoka.className} text-[#292d32] text-lg mb-4 leading-relaxed max-w-xl`}
             >
               Misi kami adalah menumbuhkan imajinasi dan rasa ingin tahu
               anak-anak sejak usia dini melalui mainan edukatif yang ramah anak,
@@ -177,7 +177,7 @@ const AboutPage = () => {
             </p>
 
             <p
-              className={`${fredoka.className}  text-[#5D2C16] text-lg font-semibold`}
+              className={`${fredoka.className}  text-[#ff5b35] text-lg font-semibold`}
             >
               Mainan Edukatif & Dekorasi Bermakna, untuk Masa Depan Cerah Anak
               Indonesia.<sup>®</sup>
@@ -204,7 +204,7 @@ const AboutPage = () => {
         <div className="max-w-6xl mx-auto px-70 text-center">
           {" "}
           <h2
-            className={`${mochiyPopOne.className} text-3xl md:text-4xl font-bold text-blue-800 mb-12`}
+            className={`${mochiyPopOne.className} text-3xl font-bold text-[#1c2957] mb-6`}
           >
             WE BELIEVE IN
           </h2>
@@ -217,7 +217,7 @@ const AboutPage = () => {
                 className="h-35 w-auto mb-6"
               />
               <p
-                className={`${mochiyPopOne.className} text-blue-800 font-semibold text-lg`}
+                className={`${mochiyPopOne.className}   text-[#292d32] font-semibold text-sm`}
               >
                 Bermain Tanpa Batas
               </p>
@@ -231,7 +231,7 @@ const AboutPage = () => {
                 className="h-35 w-auto mb-6"
               />
               <p
-                className={`${mochiyPopOne.className} text-blue-800 font-semibold text-lg`}
+                className={`${mochiyPopOne.className}   text-[#292d32] font-semibold text-sm break-words max-w-[130px]`}
               >
                 Waktu Bebas Layar
               </p>
@@ -245,7 +245,7 @@ const AboutPage = () => {
                 className="h-35 w-auto mb-6"
               />
               <p
-                className={`${mochiyPopOne.className} text-blue-800 font-semibold text-lg whitespace-nowrap`}
+                className={`${mochiyPopOne.className}   text-[#292d32] font-semibold text-sm  break-words max-w-[130px]`}
               >
                 Produk Ramah Lingkungan
               </p>
@@ -270,12 +270,12 @@ const AboutPage = () => {
             {/* Text Content */}
             <div>
               <h2
-                className={`${mochiyPopOne.className} text-2xl font-bold text-center text-[#1E3476] mb-4`}
+                className={`${mochiyPopOne.className} text-3xl font-bold text-center text-[#1c2957] mb-4`}
               >
-                Tentang Kami
+                TENTANG KAMI
               </h2>
               <p
-                className={`${fredoka.className} text-gray-800 text-lg leading-relaxed text-center`}
+                className={`${fredoka.className} text-[#292d32] text-lg leading-relaxed text-center`}
               >
                 Dari mainan kayu klasik hingga set bermain peran yang realistis,
                 produk Legowo menginspirasi imajinasi dan kreativitas anak

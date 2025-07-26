@@ -134,7 +134,7 @@ const Index = () => {
             className="group relative inline-flex items-center px-6 md:px-8 py-2 bg-orange-500 rounded-full overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
           >
             {/* Efek putih membesar dari kanan */}
-            <span className="absolute right-2 w-12 h-12 bg-white rounded-full z-0 transition-all duration-500 ease-in-out group-hover:w-52 group-hover:right-2"></span>
+            <span className="absolute right-2 w-12 h-12 bg-white rounded-full z-0 transition-all duration-500 ease-in-out group-hover:w-52 group-hover:right-1"></span>
 
             {/* Teks tombol */}
             <span className="relative z-10 text-white font-semibold transition-colors duration-500 group-hover:text-orange-500">
@@ -149,7 +149,7 @@ const Index = () => {
         </div>
       </section>
       {/* Age Group Section */}
-      <section className="py-16 bg-[#f5f4f5]">
+      <section className="py-16 px-10 bg-[#f5f4f5]">
         <div className="max-w-7xl mx-auto px-50 text-center">
           <h2 className="text-3xl font-mochiyPopOne md:text-4xl font-bold text-gray-900 mb-4">
             FUN FOR{" "}
@@ -238,7 +238,7 @@ const Index = () => {
         </div>
       </section>
       {/* Featured Products Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 px-10 bg-white">
         <div className="max-w-7xl mx-auto px-4 relative">
           <h2 className="text-2xl md:text-3xl font-mochiyPopOne mb-4 flex flex-wrap items-center gap-2 whitespace-nowrap ">
             <div className="max-w-1/2 flex flex-wrap items-center gap-2 whitespace-nowrap ">
@@ -295,18 +295,22 @@ const Index = () => {
       </section>
 
       {/* Marquee Section */}
-      <div className="w-full bg-gray-100 py-12">
+      <div className="w-full bg-gray-100 py-12 px-10">
         <span className="flex justify-center mb-3">
-            <h2 className="mx-12 text-center font-bold font-plusJakartaSans text-black/60 ">Our brand trusted partners</h2>
+          <h2 className="mx-12 text-center font-bold font-plusJakartaSans text-black/60 ">Our brand trusted partners</h2>
         </span>
-        <Marquee className="text-3xl font-bold font-mochiyPopOne  text-orange-500/10 [--gap:5rem] [--duration:18s] flex justify-center">
+        <Marquee
+          pauseOnHover
+          className="text-3xl font-bold font-mochiyPopOne text-orange-500/80 [--gap:5rem] [--duration:18s] flex justify-center"
+        >
           <span className="mx-12">Legowo</span>
           <span className="mx-12">Propan</span>
         </Marquee>
+
       </div>
 
       {/* Why Choose Us Section */}
-      <section className="bg-gray-50 py-20">
+      <section className="bg-gray-50 py-20 px-10">
         <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
           <div
             id="why-choose-us-image"
