@@ -43,7 +43,7 @@ const ContactPage = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <div className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Send us a Message</h2>
+            <h2 className="font-mochiyPopOne text-3xl font-bold text-[#1c2957] mb-6">Send us a Message</h2>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
@@ -123,7 +123,7 @@ const ContactPage = () => {
           <div className="space-y-8">
             {/* Contact Details */}
             <div className="bg-white rounded-lg shadow-lg p-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Get in Touch</h2>
+              <h2 className="font-mochiyPopOne text-3xl font-bold text-[#1c2957] mb-6">Get in Touch</h2>
 
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
@@ -143,7 +143,7 @@ const ContactPage = () => {
                     <Phone size={24} className="text-amber-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">Telepon</h3>
+                    <h3 className="font-semibold text-gray-900 mb-1">Contact</h3>
                     <p className="text-gray-600">+62 812-1767-4477</p>
                   </div>
                 </div>
@@ -154,7 +154,7 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
-                    <p className="text-gray-600">hello@legowo.com</p>
+                    <p className="text-gray-600">rusianaa965@gmail.com</p>
                   </div>
                 </div>
 
@@ -163,7 +163,7 @@ const ContactPage = () => {
                     <Clock size={24} className="text-amber-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">Jam Kerja</h3>
+                    <h3 className="font-semibold text-gray-900 mb-1">Working Hours</h3>
                     <p className="text-gray-600">
                       Monday - Friday: 9:00 AM - 6:00 PM<br />
                       Saturday: 9:00 AM - 4:00 PM<br />
@@ -178,7 +178,7 @@ const ContactPage = () => {
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
               <div className="h-64">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.9949502103007!2d110.36490731477!3d-7.793125294367074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5787bd5b6bc5%3A0x21723fd4d3684f71!2sMalioboro%20Street%2C%20Yogyakarta%2C%20Yogyakarta%20City%2C%20Special%20Region%20of%20Yogyakarta!5e0!3m2!1sen!2sid!4v1635834959431!5m2!1sen!2sid"
+                  src="https://maps.app.goo.gl/jAraXrfBzuhB9oC9A"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}

@@ -31,14 +31,14 @@ const translations = {
     },
     featuredProducts: {
       titlePart1: "Yuk kenalan dengan",
-      brandName: "Legowo",
+      brandName: "Zyifini Edukasi",
       titlePart2: "Tempatnya Mainan Anak yang",
       highlight: "Mendidik, Aman,",
       punctuation: "dan",
       titlePart3: "Penuh Warna.",
     },
     whyChooseUs: {
-      title: "Why Choose Us?",
+      title: " The Unique Appeal of Zyfini Edukasi Wooden Creations",
       description:
         "We are committed to providing the best quality products for our customers.",
     },
@@ -53,7 +53,7 @@ const translations = {
       categories: "Product Categories",
       story: "Our Story",
       storyText:
-        "Born from a passion for traditional Indonesian craftsmanship, Legowo creates beautiful wooden pieces that tell stories of heritage and artistry.",
+        "Born from a passion for traditional Indonesian craftsmanship, Zyfini Edukasi creates beautiful wooden pieces that tell stories of heritage and artistry.",
       values: "Our Values",
       newsletter: "Stay Updated",
       newsletterText:
@@ -74,12 +74,15 @@ const translations = {
       age: "Age",
     },
     categories: {
-      homeDecor: "Home Decor",
-      educationalToys: "Educational Toys",
-      furniture: "Furniture",
+      apeIndoor: "APE Indoor",
+      apeOutdoor: "APE Outdoor",
+      kursiMeja: "Kursi Meja",
+      standUsaha: "Stand Usaha",
+      rakBuku: "Rak Buku",
+      papanData: "Papan Data",
     },
     about: {
-      title: "About Legowo",
+      title: "About Zyfini Edukasi",
       vision: "Our Vision",
       mission: "Our Mission",
       story: "Our Story",
@@ -97,7 +100,7 @@ const translations = {
     },
     footer: {
       description:
-        "Handcrafted wooden home decor and educational toys made with love in Yogyakarta, Indonesia.",
+        "Handcrafted wooden home decor and educational toys made with love in Sidoarjo, Indonesia.",
       quickLinks: "Quick Links",
       categories: "Categories",
       contact: "Contact Info",
@@ -112,14 +115,14 @@ const translations = {
       contact: "Kontak",
     },
     hero: {
-      title: "Legowo - Mainan Edukatif",
+      title: "Zyfini Edukasi",
       subtitle:
         "Dekorasi rumah kayu dan mainan edukatif buatan tangan yang menghadirkan kehangatan dan karakter pada ruang hidup Anda.",
       cta: "Jelajahi Katalog Kami",
     },
     featuredProducts: {
       titlePart1: "Yuk kenalan dengan",
-      brandName: "Legowo",
+      brandName: "Zyfini Edukasi",
       titlePart2: "Tempatnya Mainan Anak yang",
       highlight: "Mendidik, Aman,",
       punctuation: "dan",
@@ -141,7 +144,7 @@ const translations = {
       categories: "Kategori Produk",
       story: "Cerita Kami",
       storyText:
-        "Lahir dari passion terhadap kerajinan tradisional Indonesia, Legowo menciptakan karya kayu indah yang bercerita tentang warisan dan seni.",
+        "Lahir dari passion terhadap kerajinan tradisional Indonesia, Zyfini Edukasi menciptakan karya kayu indah yang bercerita tentang warisan dan seni.",
       values: "Nilai-Nilai Kami",
       newsletter: "Tetap Terhubung",
       newsletterText:
@@ -167,7 +170,7 @@ const translations = {
       furniture: "Furniture",
     },
     about: {
-      title: "Tentang Legowo",
+      title: "Tentang Zyfini Edukasi",
       vision: "Visi Kami",
       mission: "Misi Kami",
       story: "Cerita Kami",
@@ -185,7 +188,7 @@ const translations = {
     },
     footer: {
       description:
-        "Dekorasi rumah kayu dan mainan edukatif buatan tangan dengan cinta di Yogyakarta, Indonesia.",
+        "Dekorasi rumah kayu dan mainan edukatif buatan tangan dengan cinta di Sidoarjo, Indonesia.",
       quickLinks: "Tautan Cepat",
       categories: "Kategori",
       contact: "Info Kontak",

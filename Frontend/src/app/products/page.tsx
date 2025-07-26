@@ -102,7 +102,7 @@ export default function ProductsPage() {
           {/* Sidebar Filter */}
           <aside className="space-y-6">
             <div className="flex justify-between items-center mb-2">
-              <h3 className="text-xl font-bold">Filter:</h3>
+              <h3 className="font-mochiyPopOne text-xl font-bold">Filter:</h3>
               {filters.length > 0 && (
                 <button
                   onClick={clearAll}
@@ -135,7 +135,7 @@ export default function ProductsPage() {
             {/* Category Filter */}
             <div className="bg-red-100 p-4 rounded-2xl">
               <div className="flex justify-between items-center mb-3">
-                <h3 className="text-lg font-bold">Category</h3>
+                <h3 className="font-mochiyPopOne text-lg font-bold">Category</h3>
                 <button
                   onClick={() => window.location.reload()}
                   className="text-sm text-amber-700 hover:underline"

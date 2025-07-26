@@ -67,7 +67,7 @@ const Navbar = () => {
               />
             </div>
             <span
-              className={`${fredoka.className} text-4xl font-bold text-white mb-2`}
+              className={`${fredoka.className} text-3xl font-bold text-white mb-1`}
             >
               Zyifini Edukasi
             </span>

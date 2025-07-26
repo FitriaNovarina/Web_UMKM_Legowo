@@ -55,11 +55,39 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">{t.footer.categories}</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-[#292f36]/50 hover:text-[#ff5b35]/80 transition-colors duration-200">{t.categories.homeDecor}</a></li>
-              <li><a href="#" className="text-[#292f36]/50 hover:text-[#ff5b35]/80 transition-colors duration-200">{t.categories.educationalToys}</a></li>
-              <li><a href="#" className="text-[#292f36]/50 hover:text-[#ff5b35]/80 transition-colors duration-200">{t.categories.furniture}</a></li>
+              <li>
+                <a href="/products?kategori=APE%20Indoor" className="text-[#292f36]/50 hover:text-[#ff5b35]/80 transition-colors duration-200">
+                  {t.categories.apeIndoor}
+                </a>
+              </li>
+              <li>
+                <a href="/products?kategori=APE%20Outdoor" className="text-[#292f36]/50 hover:text-[#ff5b35]/80 transition-colors duration-200">
+                  {t.categories.apeOutdoor}
+                </a>
+              </li>
+              <li>
+                <a href="/products?kategori=Kursi%20Meja" className="text-[#292f36]/50 hover:text-[#ff5b35]/80 transition-colors duration-200">
+                  {t.categories.kursiMeja}
+                </a>
+              </li>
+              <li>
+                <a href="/products?kategori=Stand%20Usaha" className="text-[#292f36]/50 hover:text-[#ff5b35]/80 transition-colors duration-200">
+                  {t.categories.standUsaha}
+                </a>
+              </li>
+              <li>
+                <a href="/products?kategori=Rak%20Buku" className="text-[#292f36]/50 hover:text-[#ff5b35]/80 transition-colors duration-200">
+                  {t.categories.rakBuku}
+                </a>
+              </li>
+              <li>
+                <a href="/products?kategori=Papan%20Data" className="text-[#292f36]/50 hover:text-[#ff5b35]/80 transition-colors duration-200">
+                  {t.categories.papanData}
+                </a>
+              </li>
             </ul>
           </div>
+
 
           {/* Contact Info */}
           <div className="space-y-4">
@@ -67,15 +95,15 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-2">
                 <MapPin size={16} className="text-[#ff5b35]/80" />
-                <span className="text-[#292f36]/50 text-sm">Yogyakarta, Indonesia</span>
+                <span className="text-[#292f36]/50 text-sm">Sidoarjo, Indonesia</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Phone size={16} className="text-[#ff5b35]/80" />
-                <span className="text-[#292f36]/50 text-sm">+62 812-3456-7890</span>
+                <span className="text-[#292f36]/50 text-sm">+62 812-1767-4477</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail size={16} className="text-[#ff5b35]/80" />
-                <span className="text-[#292f36]/50 text-sm">hello@legowo.com</span>
+                <span className="text-[#292f36]/50 text-sm">rusianaa965@gmail.com</span>
               </div>
             </div>
           </div>
@@ -83,7 +111,7 @@ const Footer = () => {
 
         <div className="border-t border-amber-800 mt-8 pt-8 text-center">
           <p className="text-[#292f36]/50 text-sm">
-            © 2025 Legowo. {t.footer.rights}
+            © 2025 Zyfini Edukasi. {t.footer.rights}
           </p>
         </div>
       </div>

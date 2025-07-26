@@ -114,10 +114,8 @@ const AboutPage = () => {
 
         {/* Konten Tengah Hero */}
         <div className="flex flex-col items-center justify-center h-full z-10 relative text-center px-4">
-          <button className="bg-white text-purple-700 text-sm font-semibold px-6 py-2 rounded-full shadow hover:scale-105 transition mb-4">
-            Our Journey
-          </button>
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">
+
+          <h1 className="font-mochiyPopOne text-5xl md:text-6xl font-bold mb-4">
             Zyifini <span className="text-yellow-400">Edukasi</span>
           </h1>
           <p className="text-lg md:text-xl text-white/90 max-w-3xl">
@@ -159,7 +157,7 @@ const AboutPage = () => {
       <section className="relative w-full overflow-hidden mt-0 bg-white">
         <div className="grid grid-cols-1 md:grid-cols-2 items-stretch">
           {/* Kiri: Teks */}
-          <div className="flex flex-col justify-center px-8 md:px-16 py-20 z-10">
+          <div className="flex flex-col justify-center px-8 md:px-16 py-25 z-10">
             <h2
               className={`${mochiyPopOne.className} text-5xl font-bold text-[#1c2957] mb-6`}
             >
@@ -217,7 +215,7 @@ const AboutPage = () => {
                 className="h-35 w-auto mb-6"
               />
               <p
-                className={`${mochiyPopOne.className}   text-[#292d32] font-semibold text-sm`}
+                className={`${mochiyPopOne.className}   text-[#ff5b35] font-semibold text-sm`}
               >
                 Bermain Tanpa Batas
               </p>
@@ -231,7 +229,7 @@ const AboutPage = () => {
                 className="h-35 w-auto mb-6"
               />
               <p
-                className={`${mochiyPopOne.className}   text-[#292d32] font-semibold text-sm break-words max-w-[130px]`}
+                className={`${mochiyPopOne.className}   text-[#ff5b35] font-semibold text-sm break-words max-w-[130px]`}
               >
                 Waktu Bebas Layar
               </p>
@@ -245,7 +243,7 @@ const AboutPage = () => {
                 className="h-35 w-auto mb-6"
               />
               <p
-                className={`${mochiyPopOne.className}   text-[#292d32] font-semibold text-sm  break-words max-w-[130px]`}
+                className={`${mochiyPopOne.className}   text-[#ff5b35] font-semibold text-sm  break-words max-w-[130px]`}
               >
                 Produk Ramah Lingkungan
               </p>
@@ -270,7 +268,7 @@ const AboutPage = () => {
             {/* Text Content */}
             <div>
               <h2
-                className={`${mochiyPopOne.className} text-3xl font-bold text-center text-[#1c2957] mb-4`}
+                className={`${mochiyPopOne.className} text-3xl font-bold text-center text-[#1c2957] mb-5`}
               >
                 TENTANG KAMI
               </h2>
@@ -391,15 +389,17 @@ const AboutPage = () => {
           </div>
         </section>
       </div>
-      <section className=" py-12">
+
+      {/* Galery */}
+      {/* <section className=" py-12">
         <div className="relative max-w-6xl mx-auto overflow-hidden">
           {/* Carousel */}
-          <div
-            ref={carouselRef}
-            className="flex transition-transform duration-500 ease-in-out"
-          >
-            {/* Slide 1 */}
-            <div className="min-w-full flex flex-col items-center px-8">
+      {/* <div
+        ref={carouselRef}
+        className="flex transition-transform duration-500 ease-in-out"
+      > */}
+      {/* Slide 1 */}
+      {/* <div className="min-w-full flex flex-col items-center px-8">
               <div className="bg-[#a9d28f] rounded-lg p-10 text-center">
                 <div className="text-5xl mb-4">📘</div>
                 <h2 className="text-2xl font-bold text-green-900 mb-2">
@@ -410,10 +410,10 @@ const AboutPage = () => {
                   into children's hands.
                 </p>
               </div>
-            </div>
+            </div> */}
 
-            {/* Slide 2 */}
-            <div className="min-w-full flex flex-col items-center px-8">
+      {/* Slide 2 */}
+      {/* <div className="min-w-full flex flex-col items-center px-8">
               <div className="bg-white rounded-lg p-10 text-center">
                 <img
                   src="https://images.unsplash.com/photo-1616587891345-658b5cbd860c"
@@ -428,10 +428,10 @@ const AboutPage = () => {
                   hands-on, open-ended play.
                 </p>
               </div>
-            </div>
+            </div> */}
 
-            {/* Slide 3 */}
-            <div className="min-w-full flex flex-col items-center px-8">
+      {/* Slide 3 */}
+      {/* <div className="min-w-full flex flex-col items-center px-8">
               <div className="bg-white rounded-lg p-10 text-center">
                 <img
                   src="https://images.unsplash.com/photo-1602016752627-f48b127f9a83"
@@ -447,10 +447,10 @@ const AboutPage = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          {/* Navigation Buttons */}
-          <button
+      {/* Navigation Buttons */}
+      {/* <button
             onClick={() => moveSlide(-1)}
             className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-green-700 text-white rounded-full w-10 h-10"
           >
@@ -463,7 +463,8 @@ const AboutPage = () => {
             ❯
           </button>
         </div>
-      </section>
+      </section> */}
+
       <FAQSection />
       <Footer />
     </div>

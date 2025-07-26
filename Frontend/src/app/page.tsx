@@ -56,32 +56,25 @@ const Index = () => {
 
   const values = [
     {
-      icon: Leaf,
-      title: "Eco-Friendly",
+      iconUrl: "https://toytime-theme.myshopify.com/cdn/shop/files/Group_141026.png?v=1707983157&width=1420",
+      title: "Curated Learning Furniture",
       titleId: "Ramah Lingkungan",
-      desc: "Sustainable materials",
+      desc: "Essential items like tables, chairs, and bookshelves designed to enrich children’s learning and play.",
       descId: "Bahan berkelanjutan",
     },
     {
-      icon: Award,
-      title: "Quality Crafted",
+      iconUrl: "https://toytime-theme.myshopify.com/cdn/shop/files/Group_141027.png?v=1707983157&width=1420",
+      title: "Handcrafted from Solid Wood",
       titleId: "Kualitas Terjamin",
-      desc: "Handmade excellence",
+      desc: "Made from premium solid wood—durable, natural, and aesthetically pleasing.",
       descId: "Keunggulan buatan tangan",
     },
     {
-      icon: Heart,
-      title: "Made with Love",
+      iconUrl: "https://toytime-theme.myshopify.com/cdn/shop/files/Layer_1_4818643e-2a05-4b26-8654-e6fab905dd6d.png?v=1707983157&width=1420",
+      title: " Free & Reliable Delivery",
       titleId: "Dibuat dengan Cinta",
-      desc: "Passion in every piece",
+      desc: "Free shipping with secure packaging to ensure safe and timely arrival.",
       descId: "Passion di setiap karya",
-    },
-    {
-      icon: Users,
-      title: "Family Business",
-      titleId: "Bisnis Keluarga",
-      desc: "Traditional heritage",
-      descId: "Warisan tradisional",
     },
   ];
 
@@ -134,10 +127,10 @@ const Index = () => {
             className="group relative inline-flex items-center px-6 md:px-8 py-2 bg-orange-500 rounded-full overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
           >
             {/* Efek putih membesar dari kanan */}
-            <span className="absolute right-2 w-12 h-12 bg-white rounded-full z-0 transition-all duration-500 ease-in-out group-hover:w-52 group-hover:right-1"></span>
+            <span className="absolute right-2 w-12 h-12 bg-white rounded-full z-0 transition-all duration-500 ease-in-out group-hover:w-53 group-hover:right-5"></span>
 
             {/* Teks tombol */}
-            <span className="relative z-10 text-white font-semibold transition-colors duration-500 group-hover:text-orange-500">
+            <span className="font-mochiyPopOne relative z-10 text-white font-semibold transition-colors duration-500 group-hover:text-orange-500">
               View Collection
             </span>
 
@@ -151,7 +144,7 @@ const Index = () => {
       {/* Age Group Section */}
       <section className="py-16 px-10 bg-[#f5f4f5]">
         <div className="max-w-7xl mx-auto px-50 text-center">
-          <h2 className="text-3xl font-mochiyPopOne md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl font-mochiyPopOne md:text-4xl font-bold text-[#1c2957] mb-4">
             FUN FOR{" "}
             <span className="font-mochiyPopOne text-orange-500">ALL AGES</span>
           </h2>
@@ -161,10 +154,7 @@ const Index = () => {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 justify-center">
             {/* 0–12 months */}
-            <Link
-              href="/products?age=0-12"
-              className="flex flex-col items-center group transition-transform duration-300 hover:-translate-y-1"
-            >
+            <div className="font-mochiyPopOne flex flex-col items-center group transition-transform duration-300 hover:-translate-y-1 cursor-pointer">
               <img
                 src="/images/0-12.png"
                 alt="0-12 months"
@@ -173,13 +163,11 @@ const Index = () => {
               <span className="bg-red-400 text-white px-4 py-2 rounded-full text-sm font-medium group-hover:opacity-90">
                 0–12 months
               </span>
-            </Link>
+            </div>
+
 
             {/* 1–2 years */}
-            <Link
-              href="/products?age=1-2"
-              className="flex flex-col items-center group transition-transform duration-300 hover:-translate-y-1"
-            >
+            <div className="font-mochiyPopOne flex flex-col items-center group transition-transform duration-300 hover:-translate-y-1 cursor-pointer">
               <img
                 src="/images/1-2.png"
                 alt="1-2 years"
@@ -188,27 +176,26 @@ const Index = () => {
               <span className="bg-orange-400 text-white px-4 py-2 rounded-full text-sm font-medium group-hover:opacity-90">
                 1–2 years
               </span>
-            </Link>
+            </div>
+
 
             {/* 2–3 years */}
-            <Link
-              href="/products?age=2-3"
-              className="flex flex-col items-center group transition-transform duration-300 hover:-translate-y-1"
+            <div
+              className="font-mochiyPopOne flex flex-col items-center group transition-transform duration-300 hover:-translate-y-1 cursor-default"
             >
               <img
                 src="/images/2-3.png"
                 alt="2-3 years"
-                className="w-35 h-35 object-contain mb-2"
+                className="font-mochiyPopOnew-35 h-35 object-contain mb-2"
               />
               <span className="bg-blue-400 text-white px-4 py-2 rounded-full text-sm font-medium group-hover:opacity-90">
                 2–3 years
               </span>
-            </Link>
+            </div>
 
             {/* 3–5 years */}
-            <Link
-              href="/products?age=3-5"
-              className="flex flex-col items-center group transition-transform duration-300 hover:-translate-y-1"
+            <div
+              className="font-mochiyPopOne flex flex-col items-center group transition-transform duration-300 hover:-translate-y-1 cursor-default"
             >
               <img
                 src="/images/3-5.png"
@@ -218,12 +205,11 @@ const Index = () => {
               <span className="bg-amber-400 text-white px-4 py-2 rounded-full text-sm font-medium group-hover:opacity-90">
                 3–5 years
               </span>
-            </Link>
+            </div>
 
             {/* 6–8 years */}
-            <Link
-              href="/products?age=6-8"
-              className="flex flex-col items-center group transition-transform duration-300 hover:-translate-y-1"
+            <div
+              className="font-mochiyPopOne flex flex-col items-center group transition-transform duration-300 hover:-translate-y-1 cursor-default"
             >
               <img
                 src="/images/6-8.png"
@@ -233,28 +219,29 @@ const Index = () => {
               <span className="bg-green-400 text-white px-4 py-2 rounded-full text-sm font-medium group-hover:opacity-90">
                 6–8 years
               </span>
-            </Link>
+            </div>
+
           </div>
         </div>
-      </section>
+      </section >
       {/* Featured Products Section */}
-      <section className="py-20 px-10 bg-white">
+      <section className="py-16 px-10 bg-white" >
         <div className="max-w-7xl mx-auto px-4 relative">
-          <h2 className="text-2xl md:text-3xl font-mochiyPopOne mb-4 flex flex-wrap items-center gap-2 whitespace-nowrap ">
+          <h2 className="text-3xl md:text-2xl font-mochiyPopOne mb-15 flex flex-wrap items-center gap-2 whitespace-nowrap font-bold ">
             <div className="max-w-1/2 flex flex-wrap items-center gap-2 whitespace-nowrap ">
-              <span className="text-black">
+              <span className="text-[#1c2957]">
                 {t.featuredProducts.titlePart1}
               </span>
               <span className="text-orange-500">
                 {t.featuredProducts.brandName}
               </span>
-              <span className="text-black">
+              <span className="text-[#1c2957]">
                 {t.featuredProducts.titlePart2}
               </span>
               <span className="text-green-600">
                 {t.featuredProducts.highlight}
               </span>{" "}
-              <span className="text-black">
+              <span className="text-[#1c2957]">
                 {t.featuredProducts.punctuation}
               </span>
               <span className="text-orange-500">
@@ -292,10 +279,10 @@ const Index = () => {
             </Link>
           </div> */}
         </div>
-      </section>
+      </section >
 
       {/* Marquee Section */}
-      <div className="w-full bg-gray-100 py-12 px-10">
+      <div className="w-full bg-gray-100 py-12 px-10" >
         <span className="flex justify-center mb-3">
           <h2 className="mx-12 text-center font-bold font-plusJakartaSans text-black/60 ">Our brand trusted partners</h2>
         </span>
@@ -303,22 +290,22 @@ const Index = () => {
           pauseOnHover
           className="text-3xl font-bold font-mochiyPopOne text-orange-500/80 [--gap:5rem] [--duration:18s] flex justify-center"
         >
-          <span className="mx-12">Legowo</span>
+          <span className="mx-12">Zyfini Edukasi</span>
           <span className="mx-12">Propan</span>
         </Marquee>
 
-      </div>
+      </div >
 
       {/* Why Choose Us Section */}
-      <section className="bg-gray-50 py-20 px-10">
-        <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+      <section className="bg-gray-50 py-10 px-10" >
+        <div className="font-mochiyPopOne text-[#1c2957] max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
           <div
             id="why-choose-us-image"
-            className="rounded-lg overflow-hidden shadow-lg"
+
             data-animate
           >
             <img
-              src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=600&h=700&fit=crop"
+              src="https://toytime-theme.myshopify.com/cdn/shop/files/Mask_group_3514798e-7d90-4144-a900-c6b97e546f20.png?v=1707983159"
               alt="Crafting furniture"
               className="w-full h-full object-cover"
             />
@@ -328,21 +315,23 @@ const Index = () => {
             className="prose max-w-none"
             data-animate
           >
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">
-              {t.whyChooseUs.title}
+            <h2 className="text-3xl text-gray-800 mb-5">
+              The Unique Appeal of <span className="text-orange-500 font-semibold">Zyfini Edukasi</span>  Wooden Creations
             </h2>
+
             <p className="text-gray-600 mb-6">{t.whyChooseUs.description}</p>
-            <ul className="space-y-4">
+            <ul className="space-y-8">
               {values.map((value, index) => (
                 <li key={index} className="flex items-start">
                   <div className="flex-shrink-0">
-                    <value.icon className="w-6 h-6 text-orange-500" />
+                    <img src={value.iconUrl} alt={value.title} className="w-10 h-10 text-orange-500" />
+
                   </div>
-                  <div className="ml-4">
-                    <h4 className="text-lg font-semibold text-gray-800">
+                  <div className="ml-4 ">
+                    <h4 className="px-3 text-lg text-gray-800">
                       {language === "en" ? value.title : value.titleId}
                     </h4>
-                    <p className="text-gray-600">
+                    <p className="px-3 text-gray-600">
                       {language === "en" ? value.desc : value.descId}
                     </p>
                   </div>
@@ -351,12 +340,12 @@ const Index = () => {
             </ul>
           </div>
         </div>
-      </section>
+      </section >
 
       <TestimonialsSection />
 
       {/* Call to Action */}
-      <section className="bg-orange-500 text-white">
+      <section className="font-mochiyPopOne bg-orange-500 text-white">
         <div className="max-w-7xl mx-auto px-4 py-16 text-center">
           <h2 className="text-3xl font-bold mb-4">{t.cta.title}</h2>
           <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
@@ -372,7 +361,7 @@ const Index = () => {
       </section>
 
       <Footer />
-    </div>
+    </div >
   );
 };
 

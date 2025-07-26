@@ -15,7 +15,7 @@ const TestimonialsSection: React.FC = () => {
       rating: 5,
       comment: 'Amazing quality! The wooden toy chest I ordered is absolutely beautiful and my kids love it.',
       commentId: 'Kualitas luar biasa! Peti mainan kayu yang saya pesan sangat indah dan anak-anak saya menyukainya.',
-      avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face'
+      avatar: 'https://images.unsplash.com/photo-1581961860819-71121c811c99?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
       name: 'Michael Chen',
@@ -40,10 +40,10 @@ const TestimonialsSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 bg-gray-50 px-10">
+    <section className="py-8 bg-gray-50 px-10">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="font-mochiyPopOne text-4xl text-gray-900 mb-4">
             {language === 'en' ? 'What Our Customers Say' : 'Kata Pelanggan Kami'}
           </h2>
           <div className="w-24 h-1 bg-amber-600 mx-auto"></div>
