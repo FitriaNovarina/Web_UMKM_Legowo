@@ -24,10 +24,10 @@ const translations = {
       contact: "Contact",
     },
     hero: {
-      title: "Crafting Comfort. Redefining Spaces.",
+      title: "Education Zyfini",
       subtitle:
-        "Handcrafted wooden home decor and educational toys that bring warmth and character to your living spaces.",
-      cta: "Explore Our Catalog",
+        "UMKM Legowo is a local craftsman that offers a variety of educational products and children's furniture made from wood — ranging from indoor and outdoor play equipment, children's tables and chairs, business stands, to bookshelves and tables.",
+      cta: "View Collection",
     },
     featuredProducts: {
       titlePart1: "Yuk kenalan dengan",
@@ -36,6 +36,12 @@ const translations = {
       highlight: "Mendidik, Aman,",
       punctuation: "dan",
       titlePart3: "Penuh Warna.",
+      viewAll: "View All",
+    },
+    baby : {
+      title: "FUN FOR",
+      ages: "ALL AGES",
+      description: "Toys for kids of every age, stage, and ability!",
     },
     whyChooseUs: {
       title: " The Unique Appeal of Zyfini Edukasi Wooden Creations",
@@ -117,8 +123,8 @@ const translations = {
     hero: {
       title: "Zyfini Edukasi",
       subtitle:
-        "Dekorasi rumah kayu dan mainan edukatif buatan tangan yang menghadirkan kehangatan dan karakter pada ruang hidup Anda.",
-      cta: "Jelajahi Katalog Kami",
+        "UMKM Legowo adalah pengrajin lokal yang menghadirkan berbagai produk edukatif dan furnitur anak-anak dari kayu — mulai dari APE Indoor, APE Outdoor, Meja Kursi Anak, Stand Usaha, hingga Rak Buku dan meja",
+      cta: "Lihat Koleksi",
     },
     featuredProducts: {
       titlePart1: "Yuk kenalan dengan",
@@ -127,6 +133,12 @@ const translations = {
       highlight: "Mendidik, Aman,",
       punctuation: "dan",
       titlePart3: "Penuh Warna.",
+      viewAll: "Lihat Semua",
+    },
+    baby : {
+      title: "MENYENANGKAN UNTUK",
+      ages: "SEMUA USIA",
+      description: "Mainan untuk anak-anak setiap usia, tahap, dan keterampilan!",
     },
     whyChooseUs: {
       title: "Mengapa Memilih Kami?",

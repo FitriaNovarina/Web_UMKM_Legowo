@@ -7,52 +7,117 @@ import TestimonialsSection from "../components/TestimonialsSection";
 import LoadingSkeleton from "../components/LoadingSkeleton";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { ProductCard } from "../components/ProductCard";
+import { ProductCard, Product as ProductCardType } from "../components/ProductCard";
 import { Marquee } from "@/components/marquee";
+
+// Define the structure of the product data coming from the API
+interface APIProduct {
+  id: number;
+  nama: string;
+  kategori: string;
+  harga: number;
+  stok: number;
+  deskripsi: string;
+  gambar: string;
+}
 
 const Index = () => {
   const { t, language } = useLanguage();
   const [isLoading, setIsLoading] = useState(true);
+  // Provide the correct type for the state
+  const [featuredProducts, setFeaturedProducts] = useState<ProductCardType[]>([]);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [itemsPerSlide, setItemsPerSlide] = useState(4);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const maxSlides = Math.max(0, featuredProducts.length - itemsPerSlide);
 
+  // Handle responsive items per slide
   useEffect(() => {
-    // Simulate loading
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setItemsPerSlide(1); // Mobile: 1 item
+      } else if (window.innerWidth < 1024) {
+        setItemsPerSlide(2); // Tablet: 2 items
+      } else {
+        setItemsPerSlide(4); // Desktop: 4 items
+      }
+      setCurrentSlide(0); // Reset slide when changing items per slide
+    };
 
-    return () => clearTimeout(timer);
+    handleResize(); // Set initial value
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const featuredProducts = [
-    {
-      id: "1",
-      name: "Smart Learning Bricks",
-      category: "Arabella",
-      image: "/images/s31.png",
-      price: "Rp 150.000",
-    },
-    {
-      id: "2",
-      name: "Wooden Busy Board House",
-      category: "Deuter",
-      image: "/images/s32.png",
-      price: "Rp 250.000",
-    },
-    {
-      id: "3",
-      name: "Wooden Geometric Shapes",
-      category: "Geometrical Blocks",
-      image: "/images/s33.png",
-      price: "Rp 180.000",
-    },
-    {
-      id: "4",
-      name: "Wooden Jigsaw Puzzle",
-      category: "Deuter",
-      image: "/images/s31.png",
-      price: "Rp 120.000",
-    },
-  ];
+  const nextSlide = () => {
+    setCurrentSlide(prev => Math.min(prev + 1, maxSlides));
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide(prev => Math.max(prev - 1, 0));
+  };
+
+  // Touch handlers for swipe functionality
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(0); // Reset touchEnd
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe && currentSlide < maxSlides) {
+      nextSlide();
+    }
+    if (isRightSwipe && currentSlide > 0) {
+      prevSlide();
+    }
+  };
+
+  useEffect(() => {
+    const fetchFeaturedProducts = async () => {
+      try {
+        const response = await fetch('/api/produk');
+        const allProducts = await response.json();
+        
+        // Take the first 8 products and map them for carousel
+        const mappedProducts: ProductCardType[] = allProducts.slice(0, 8).map((product: APIProduct) => ({
+          id: String(product.id),
+          name: product.nama, // Assuming ProductCard uses 'name'
+          category: product.kategori,
+          images: [`http://127.0.0.1:8000/uploads/${product.gambar}`],
+          price: product.harga,
+          inStock: product.stok > 0,
+          // Add other fields required by ProductCardType if necessary
+          name_id: product.nama,
+          name_en: product.nama,
+          description_id: product.deskripsi,
+          description_en: product.deskripsi,
+          ageRange: '',
+          dimensions: { length: 0, width: 0, height: 0 },
+          materials: [],
+          weight: 0,
+          featured: false,
+        }));
+
+        setFeaturedProducts(mappedProducts);
+      } catch (error) {
+        console.error("Failed to fetch featured products:", error);
+      } finally {
+        setIsLoading(false); // Stop loading after fetching
+      }
+    };
+
+    fetchFeaturedProducts();
+  }, []);
 
   const values = [
     {
@@ -118,20 +183,18 @@ const Index = () => {
             {t.hero.title}
           </h1>
           <p className="font-inter text-sm md:text-md lg:text-lg text-white/90 mb-8 animate-fade-in animation-delay-300 max-w-2xl mx-auto">
-            UMKM Legowo adalah pengrajin lokal yang menghadirkan berbagai produk
-            edukatif dan furnitur anak-anak dari kayu — mulai dari APE Indoor,
-            APE Outdoor, Meja Kursi Anak, Stand Usaha, hingga Rak Buku dan meja.
+            {t.hero.subtitle}
           </p>
           <Link
             href="/products"
             className="group relative inline-flex items-center px-6 md:px-8 py-2 bg-orange-500 rounded-full overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
           >
             {/* Efek putih membesar dari kanan */}
-            <span className="absolute right-2 w-12 h-12 bg-white rounded-full z-0 transition-all duration-500 ease-in-out group-hover:w-53 group-hover:right-5"></span>
+            <span className="absolute right-2 w-12 h-12 bg-white rounded-full z-0 transition-all duration-500 ease-in-out group-hover:w-54 group-hover:right-2"></span>
 
             {/* Teks tombol */}
             <span className="font-mochiyPopOne relative z-10 text-white font-semibold transition-colors duration-500 group-hover:text-orange-500">
-              View Collection
+              {t.hero.cta}
             </span>
 
             {/* Ikon panah di kanan */}
@@ -145,11 +208,11 @@ const Index = () => {
       <section className="py-16 px-10 bg-[#f5f4f5]">
         <div className="max-w-7xl mx-auto px-50 text-center">
           <h2 className="text-3xl font-mochiyPopOne md:text-4xl font-bold text-[#1c2957] mb-4">
-            FUN FOR{" "}
-            <span className="font-mochiyPopOne text-orange-500">ALL AGES</span>
+          {t.baby.title}{" "}
+            <span className="font-mochiyPopOne text-orange-500">{t.baby.ages}</span>
           </h2>
           <p className="text-base md:text-lg text-gray-700 mb-10">
-            Toys for kids of every age, stage, and ability!
+            {t.baby.description}
           </p>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 justify-center">
@@ -254,30 +317,74 @@ const Index = () => {
             {t.featuredProducts.description}
           </p> */}
 
-          {/* PRODUCT CARD */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+          {/* PRODUCT CAROUSEL */}
+          <div className="relative">
+            {/* Carousel Container */}
+            <div className="overflow-hidden">
+              <div 
+                className="flex transition-transform duration-300 ease-in-out"
+                style={{ transform: `translateX(-${currentSlide * (100 / itemsPerSlide)}%)` }}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
+                {featuredProducts.map((product, index) => {
+                  const widthClass = itemsPerSlide === 1 ? 'w-full' : 
+                                   itemsPerSlide === 2 ? 'w-1/2' : 'w-1/4';
+                  return (
+                    <div key={product.id} className={`${widthClass} flex-shrink-0 px-4`}>
+                      <ProductCard product={product} index={index} />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Navigation Arrows */}
+            {featuredProducts.length > itemsPerSlide && (
+              <>
+                <button 
+                  onClick={prevSlide}
+                  disabled={currentSlide === 0}
+                  className="absolute top-1/2 -left-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <ArrowLeft className="h-6 w-6 text-gray-700" />
+                </button>
+                <button 
+                  onClick={nextSlide}
+                  disabled={currentSlide >= maxSlides}
+                  className="absolute top-1/2 -right-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <ArrowRight className="h-6 w-6 text-gray-700" />
+                </button>
+              </>
+            )}
+
+            {/* Dots Indicator */}
+            {featuredProducts.length > itemsPerSlide && (
+              <div className="flex justify-center mt-6 space-x-2">
+                {Array.from({ length: maxSlides + 1 }).map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentSlide(index)}
+                    className={`w-3 h-3 rounded-full transition-colors ${
+                      currentSlide === index ? 'bg-orange-500' : 'bg-gray-300'
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
-          {/* Navigation Arrows */}
-          {/* <button className="absolute top-1/2 -left-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition">
-            <ArrowLeft className="h-6 w-6 text-gray-700" />
-          </button>
-          <button className="absolute top-1/2 -right-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition">
-            <ArrowRight className="h-6 w-6 text-gray-700" />
-          </button> */}
-
           {/* BUTTON VIEW ALL */}
-          {/* <div className="text-center mt-12">
+          <div className="text-center mt-12">
             <Link
               href="/products"
               className="bg-orange-500 text-white font-semibold px-8 py-3 rounded-full hover:bg-orange-600 transition-colors shadow-lg hover:shadow-xl"
             >
               {t.featuredProducts.viewAll}
             </Link>
-          </div> */}
+          </div>
         </div>
       </section >
 

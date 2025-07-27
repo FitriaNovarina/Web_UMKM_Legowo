@@ -45,7 +45,7 @@ export default function ProductList({ selectedCategory, sortOption }: ProductLis
 
   if (loading) return <p>Loading katalog produk...</p>
 
-  let sortedProducts = [...products]
+  const sortedProducts = [...products]
 
   if (sortOption === 'harga_asc') {
     sortedProducts.sort((a, b) => a.harga - b.harga)
