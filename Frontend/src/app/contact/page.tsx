@@ -176,14 +176,14 @@ const ContactPage = () => {
 
             {/* Map */}
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <div className="h-64">
-                <iframe
-                  src="https://maps.app.goo.gl/jAraXrfBzuhB9oC9A"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
+              <div className="h-96">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126586.01333550861!2d112.47792561751022!3d-7.485899279124917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7e1ebe5abdd77%3A0xfa9ddf992f7a210d!2sMainan%20edukasi%20kayu%20dan%20besi%20untuk%20anak%20TK%20SD%20dan%20Playground%20murah%20bahan%20premium%20se%20Sidoarjo!5e0!3m2!1sid!2sid!4v1753608514766!5m2!1sid!2sid" 
+                  width="100%" 
+                  height="100%" 
+                  style={{ border: 0 }} 
+                  allowFullScreen 
+                  loading="lazy" 
                   referrerPolicy="no-referrer-when-downgrade"
                   title="Legowo Location"
                 ></iframe>
