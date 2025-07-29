@@ -5,6 +5,8 @@ import {
   useState,
   ReactNode,
   useEffect,
+  useCallback,
+  useMemo,
 } from "react";
 
 type Language = "en" | "id";
@@ -177,9 +179,12 @@ const translations = {
       age: "Usia",
     },
     categories: {
-      homeDecor: "Dekorasi Rumah",
-      educationalToys: "Mainan Edukatif",
-      furniture: "Furniture",
+      apeIndoor: "APE Dalam Ruangan",
+      apeOutdoor: "APE Luar Ruangan",
+      kursiMeja: "Kursi & Meja",
+      standUsaha: "Stand Usaha",
+      rakBuku: "Rak Buku",
+      papanData: "Papan Data",
     },
     about: {
       title: "Tentang Zyfini Edukasi",
@@ -224,16 +229,25 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
-  const toggleLanguage = () => {
-    const newLanguage = language === "en" ? "id" : "en";
-    setLanguage(newLanguage);
-    localStorage.setItem("language", newLanguage);
-  };
+  const toggleLanguage = useCallback(() => {
+    setLanguage((prevLang) => {
+      const newLanguage = prevLang === "en" ? "id" : "en";
+      localStorage.setItem("language", newLanguage);
+      return newLanguage;
+    });
+  }, []);
+
+  const value = useMemo(
+    () => ({
+      language,
+      toggleLanguage,
+      t: translations[language],
+    }),
+    [language, toggleLanguage]
+  );
 
   return (
-    <LanguageContext.Provider
-      value={{ language, toggleLanguage, t: translations[language] }}
-    >
+    <LanguageContext.Provider value={value}>
       {children}
     </LanguageContext.Provider>
   );
