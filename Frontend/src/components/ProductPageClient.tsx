@@ -2,24 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { X, Loader2 } from 'lucide-react';
+import { X } from 'lucide-react';
 import ProductList from '@/components/ProductList';
-import { Product as ProductCardType } from '@/components/ProductCard';
 
 interface Category {
   id: number;
   name: string;
-}
-
-interface APIProduct {
-  id: number;
-  nama: string;
-  kategori: string;
-  harga: number;
-  stok: number;
-  status: string;
-  deskripsi: string;
-  gambar: string;
 }
 
 interface ProductPageClientProps {
@@ -32,9 +20,6 @@ export default function ProductPageClient({ initialCategories }: ProductPageClie
 
   const [filters, setFilters] = useState<string[]>([]);
   const [sortOption, setSortOption] = useState<string>('nama_asc');
-  const [products, setProducts] = useState<APIProduct[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
     if (categoryFromURL) {
       setFilters([categoryFromURL]);
@@ -43,65 +28,14 @@ export default function ProductPageClient({ initialCategories }: ProductPageClie
     }
   }, [categoryFromURL]);
 
-  const selectedCategory =
-    filters.includes('All') || filters.length === 0 ? undefined : filters[0];
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      setIsLoading(true);
-      try {
-        const url = selectedCategory
-          ? `/api/produk?kategori=${encodeURIComponent(selectedCategory)}`
-          : '/api/produk';
-
-        const res = await fetch(url, { cache: 'no-store' });
-        if (!res.ok) throw new Error('Failed to fetch products');
-        const data = await res.json();
-        setProducts(data);
-      } catch (error) {
-        console.error('Gagal fetch produk:', error);
-        setProducts([]); // Clear products on error
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, [selectedCategory]);
-
   const removeFilter = (filter: string) => {
     setFilters((prev) => prev.filter((f) => f !== filter));
   };
 
   const clearAll = () => setFilters(['All']);
 
-  const sortedProducts = [...products];
-  if (sortOption === 'harga_asc') {
-    sortedProducts.sort((a, b) => a.harga - b.harga);
-  } else if (sortOption === 'harga_desc') {
-    sortedProducts.sort((a, b) => b.harga - a.harga);
-  } else if (sortOption === 'nama_asc') {
-    sortedProducts.sort((a, b) => a.nama.localeCompare(b.nama));
-  } else if (sortOption === 'nama_desc') {
-    sortedProducts.sort((a, b) => b.nama.localeCompare(a.nama));
-  }
-
-  const finalProducts: ProductCardType[] = sortedProducts.map((product) => ({
-    id: String(product.id),
-    name_id: product.nama,
-    name_en: product.nama,
-    description_id: product.deskripsi,
-    description_en: product.deskripsi,
-    images: [`http://127.0.0.1:8000/uploads/${product.gambar}`],
-    category: product.kategori,
-    price: product.harga,
-    ageRange: '',
-    dimensions: { length: 0, width: 0, height: 0 },
-    materials: [],
-    weight: 0,
-    inStock: product.stok > 0,
-    featured: false,
-  }));
+  const selectedCategory =
+    filters.includes('All') || filters.length === 0 ? undefined : filters[0];
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -185,14 +119,7 @@ export default function ProductPageClient({ initialCategories }: ProductPageClie
           </div>
         </div>
 
-        {isLoading ? (
-          <div className="flex flex-col items-center justify-center py-10 space-y-2">
-            <Loader2 className="animate-spin h-8 w-8 text-amber-500" />
-            <p className="text-sm text-gray-600">Loading products...</p>
-          </div>
-        ) : (
-          <ProductList products={finalProducts} />
-        )}
+        <ProductList selectedCategory={selectedCategory} sortOption={sortOption} />
       </main>
     </div>
   );
