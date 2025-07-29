@@ -2,16 +2,7 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Mochiy_Pop_One, Fredoka } from "next/font/google";
 
-const mochiyPopOne = Mochiy_Pop_One({
-  subsets: ["latin"],
-  weight: ["400"],
-});
-const fredoka = Fredoka({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
 
 
 const FAQSection: React.FC = () => {

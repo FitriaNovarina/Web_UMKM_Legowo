@@ -1,13 +1,17 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { ArrowRight, Leaf, Award, Heart, Users, ArrowLeft } from "lucide-react";
+import { ArrowRight, ArrowLeft } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import TestimonialsSection from "../components/TestimonialsSection";
 import LoadingSkeleton from "../components/LoadingSkeleton";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { ProductCard, Product as ProductCardType } from "../components/ProductCard";
+import {
+  ProductCard,
+  Product as ProductCardType,
+} from "../components/ProductCard";
 import { Marquee } from "@/components/marquee";
 
 // Define the structure of the product data coming from the API
@@ -25,12 +29,15 @@ const Index = () => {
   const { t, language } = useLanguage();
   const [isLoading, setIsLoading] = useState(true);
   // Provide the correct type for the state
-  const [featuredProducts, setFeaturedProducts] = useState<ProductCardType[]>([]);
+  const [featuredProducts, setFeaturedProducts] = useState<ProductCardType[]>(
+    []
+  );
   const [currentSlide, setCurrentSlide] = useState(0);
   const [itemsPerSlide, setItemsPerSlide] = useState(4);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const maxSlides = Math.max(0, featuredProducts.length - itemsPerSlide);
+  const [fetchError, setFetchError] = useState(false);
 
   // Handle responsive items per slide
   useEffect(() => {
@@ -46,16 +53,16 @@ const Index = () => {
     };
 
     handleResize(); // Set initial value
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const nextSlide = () => {
-    setCurrentSlide(prev => Math.min(prev + 1, maxSlides));
+    setCurrentSlide((prev) => Math.min(prev + 1, maxSlides));
   };
 
   const prevSlide = () => {
-    setCurrentSlide(prev => Math.max(prev - 1, 0));
+    setCurrentSlide((prev) => Math.max(prev - 1, 0));
   };
 
   // Touch handlers for swipe functionality
@@ -85,57 +92,62 @@ const Index = () => {
   useEffect(() => {
     const fetchFeaturedProducts = async () => {
       try {
-        const response = await fetch('/api/produk');
+        const response = await fetch("/api/produk");
+        if (!response.ok) throw new Error("Server error");
         const allProducts = await response.json();
-        
-        // Take the first 8 products and map them for carousel
-        const mappedProducts: ProductCardType[] = allProducts.slice(0, 8).map((product: APIProduct) => ({
-          id: String(product.id),
-          name: product.nama, // Assuming ProductCard uses 'name'
-          category: product.kategori,
-          images: [`http://127.0.0.1:8000/uploads/${product.gambar}`],
-          price: product.harga,
-          inStock: product.stok > 0,
-          // Add other fields required by ProductCardType if necessary
-          name_id: product.nama,
-          name_en: product.nama,
-          description_id: product.deskripsi,
-          description_en: product.deskripsi,
-          ageRange: '',
-          dimensions: { length: 0, width: 0, height: 0 },
-          materials: [],
-          weight: 0,
-          featured: false,
-        }));
-
+        const mappedProducts: ProductCardType[] = allProducts
+          .slice(0, 8)
+          .map((product: APIProduct) => ({
+            id: String(product.id),
+            name: product.nama, // Assuming ProductCard uses 'name'
+            category: product.kategori,
+            images: [`http://127.0.0.1:8000/uploads/${product.gambar}`],
+            price: product.harga,
+            inStock: product.stok > 0,
+            // Add other fields required by ProductCardType if necessary
+            name_id: product.nama,
+            name_en: product.nama,
+            description_id: product.deskripsi,
+            description_en: product.deskripsi,
+            ageRange: "",
+            dimensions: { length: 0, width: 0, height: 0 },
+            materials: [],
+            weight: 0,
+            featured: false,
+          }));
         setFeaturedProducts(mappedProducts);
+        setFetchError(false);
       } catch (error) {
+        setFetchError(true);
+        setFeaturedProducts([]);
         console.error("Failed to fetch featured products:", error);
       } finally {
         setIsLoading(false); // Stop loading after fetching
       }
     };
-
     fetchFeaturedProducts();
   }, []);
 
   const values = [
     {
-      iconUrl: "https://toytime-theme.myshopify.com/cdn/shop/files/Group_141026.png?v=1707983157&width=1420",
+      iconUrl:
+        "https://toytime-theme.myshopify.com/cdn/shop/files/Group_141026.png?v=1707983157&width=1420",
       title: "Curated Learning Furniture",
       titleId: "Ramah Lingkungan",
       desc: "Essential items like tables, chairs, and bookshelves designed to enrich children’s learning and play.",
       descId: "Bahan berkelanjutan",
     },
     {
-      iconUrl: "https://toytime-theme.myshopify.com/cdn/shop/files/Group_141027.png?v=1707983157&width=1420",
+      iconUrl:
+        "https://toytime-theme.myshopify.com/cdn/shop/files/Group_141027.png?v=1707983157&width=1420",
       title: "Handcrafted from Solid Wood",
       titleId: "Kualitas Terjamin",
       desc: "Made from premium solid wood—durable, natural, and aesthetically pleasing.",
       descId: "Keunggulan buatan tangan",
     },
     {
-      iconUrl: "https://toytime-theme.myshopify.com/cdn/shop/files/Layer_1_4818643e-2a05-4b26-8654-e6fab905dd6d.png?v=1707983157&width=1420",
+      iconUrl:
+        "https://toytime-theme.myshopify.com/cdn/shop/files/Layer_1_4818643e-2a05-4b26-8654-e6fab905dd6d.png?v=1707983157&width=1420",
       title: " Free & Reliable Delivery",
       titleId: "Dibuat dengan Cinta",
       desc: "Free shipping with secure packaging to ensure safe and timely arrival.",
@@ -208,8 +220,10 @@ const Index = () => {
       <section className="py-16 px-10 bg-[#f5f4f5]">
         <div className="max-w-7xl mx-auto px-50 text-center">
           <h2 className="text-3xl font-mochiyPopOne md:text-4xl font-bold text-[#1c2957] mb-4">
-          {t.baby.title}{" "}
-            <span className="font-mochiyPopOne text-orange-500">{t.baby.ages}</span>
+            {t.baby.title}{" "}
+            <span className="font-mochiyPopOne text-orange-500">
+              {t.baby.ages}
+            </span>
           </h2>
           <p className="text-base md:text-lg text-gray-700 mb-10">
             {t.baby.description}
@@ -218,38 +232,40 @@ const Index = () => {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 justify-center">
             {/* 0–12 months */}
             <div className="font-mochiyPopOne flex flex-col items-center group transition-transform duration-300 hover:-translate-y-1 cursor-pointer">
-              <img
+              <Image
                 src="/images/0-12.png"
                 alt="0-12 months"
-                className="w-35 h-35 object-contain mb-2"
+                width={140}
+                height={140}
+                className="object-contain mb-2"
               />
               <span className="bg-red-400 text-white px-4 py-2 rounded-full text-sm font-medium group-hover:opacity-90">
                 0–12 months
               </span>
             </div>
 
-
             {/* 1–2 years */}
             <div className="font-mochiyPopOne flex flex-col items-center group transition-transform duration-300 hover:-translate-y-1 cursor-pointer">
-              <img
+              <Image
                 src="/images/1-2.png"
                 alt="1-2 years"
-                className="w-35 h-35 object-contain mb-2"
+                width={140}
+                height={140}
+                className="object-contain mb-2"
               />
               <span className="bg-orange-400 text-white px-4 py-2 rounded-full text-sm font-medium group-hover:opacity-90">
                 1–2 years
               </span>
             </div>
 
-
             {/* 2–3 years */}
-            <div
-              className="font-mochiyPopOne flex flex-col items-center group transition-transform duration-300 hover:-translate-y-1 cursor-default"
-            >
-              <img
+            <div className="font-mochiyPopOne flex flex-col items-center group transition-transform duration-300 hover:-translate-y-1 cursor-default">
+              <Image
                 src="/images/2-3.png"
                 alt="2-3 years"
-                className="font-mochiyPopOnew-35 h-35 object-contain mb-2"
+                width={140}
+                height={140}
+                className="object-contain mb-2"
               />
               <span className="bg-blue-400 text-white px-4 py-2 rounded-full text-sm font-medium group-hover:opacity-90">
                 2–3 years
@@ -257,13 +273,13 @@ const Index = () => {
             </div>
 
             {/* 3–5 years */}
-            <div
-              className="font-mochiyPopOne flex flex-col items-center group transition-transform duration-300 hover:-translate-y-1 cursor-default"
-            >
-              <img
+            <div className="font-mochiyPopOne flex flex-col items-center group transition-transform duration-300 hover:-translate-y-1 cursor-default">
+              <Image
                 src="/images/3-5.png"
                 alt="3-5 years"
-                className="w-35 h-35 object-contain mb-2"
+                width={140}
+                height={140}
+                className="object-contain mb-2"
               />
               <span className="bg-amber-400 text-white px-4 py-2 rounded-full text-sm font-medium group-hover:opacity-90">
                 3–5 years
@@ -271,24 +287,23 @@ const Index = () => {
             </div>
 
             {/* 6–8 years */}
-            <div
-              className="font-mochiyPopOne flex flex-col items-center group transition-transform duration-300 hover:-translate-y-1 cursor-default"
-            >
-              <img
+            <div className="font-mochiyPopOne flex flex-col items-center group transition-transform duration-300 hover:-translate-y-1 cursor-default">
+              <Image
                 src="/images/6-8.png"
                 alt="6-8 years"
-                className="w-35 h-35 object-contain mb-2"
+                width={140}
+                height={140}
+                className="object-contain mb-2"
               />
               <span className="bg-green-400 text-white px-4 py-2 rounded-full text-sm font-medium group-hover:opacity-90">
                 6–8 years
               </span>
             </div>
-
           </div>
         </div>
-      </section >
+      </section>
       {/* Featured Products Section */}
-      <section className="py-16 px-10 bg-white" >
+      <section className="py-16 px-10 bg-white">
         <div className="max-w-7xl mx-auto px-4 relative">
           <h2 className="text-3xl md:text-2xl font-mochiyPopOne mb-15 flex flex-wrap items-center gap-2 whitespace-nowrap font-bold ">
             <div className="max-w-1/2 flex flex-wrap items-center gap-2 whitespace-nowrap ">
@@ -312,70 +327,79 @@ const Index = () => {
               </span>
             </div>
           </h2>
-
-          {/* <p className="text-lg text-gray-600 text-center mb-10">
-            {t.featuredProducts.description}
-          </p> */}
-
-          {/* PRODUCT CAROUSEL */}
-          <div className="relative">
-            {/* Carousel Container */}
-            <div className="overflow-hidden">
-              <div 
-                className="flex transition-transform duration-300 ease-in-out"
-                style={{ transform: `translateX(-${currentSlide * (100 / itemsPerSlide)}%)` }}
-                onTouchStart={handleTouchStart}
-                onTouchMove={handleTouchMove}
-                onTouchEnd={handleTouchEnd}
-              >
-                {featuredProducts.map((product, index) => {
-                  const widthClass = itemsPerSlide === 1 ? 'w-full' : 
-                                   itemsPerSlide === 2 ? 'w-1/2' : 'w-1/4';
-                  return (
-                    <div key={product.id} className={`${widthClass} flex-shrink-0 px-4`}>
-                      <ProductCard product={product} index={index} />
-                    </div>
-                  );
-                })}
-              </div>
+          {/* Pesan error atau stok kosong */}
+          {fetchError || featuredProducts.length === 0 ? (
+            <div className="w-full text-center py-12">
+              <p className="text-xl text-red-500 font-bold">Stok kosong</p>
             </div>
-
-            {/* Navigation Arrows */}
-            {featuredProducts.length > itemsPerSlide && (
-              <>
-                <button 
-                  onClick={prevSlide}
-                  disabled={currentSlide === 0}
-                  className="absolute top-1/2 -left-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition disabled:opacity-50 disabled:cursor-not-allowed"
+          ) : (
+            <div className="relative">
+              {/* Carousel Container */}
+              <div className="overflow-hidden">
+                <div
+                  className="flex transition-transform duration-300 ease-in-out"
+                  style={{
+                    transform: `translateX(-${
+                      currentSlide * (100 / itemsPerSlide)
+                    }%)`,
+                  }}
+                  onTouchStart={handleTouchStart}
+                  onTouchMove={handleTouchMove}
+                  onTouchEnd={handleTouchEnd}
                 >
-                  <ArrowLeft className="h-6 w-6 text-gray-700" />
-                </button>
-                <button 
-                  onClick={nextSlide}
-                  disabled={currentSlide >= maxSlides}
-                  className="absolute top-1/2 -right-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <ArrowRight className="h-6 w-6 text-gray-700" />
-                </button>
-              </>
-            )}
-
-            {/* Dots Indicator */}
-            {featuredProducts.length > itemsPerSlide && (
-              <div className="flex justify-center mt-6 space-x-2">
-                {Array.from({ length: maxSlides + 1 }).map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentSlide(index)}
-                    className={`w-3 h-3 rounded-full transition-colors ${
-                      currentSlide === index ? 'bg-orange-500' : 'bg-gray-300'
-                    }`}
-                  />
-                ))}
+                  {featuredProducts.map((product, index) => {
+                    const widthClass =
+                      itemsPerSlide === 1
+                        ? "w-full"
+                        : itemsPerSlide === 2
+                        ? "w-1/2"
+                        : "w-1/4";
+                    return (
+                      <div
+                        key={product.id}
+                        className={`${widthClass} flex-shrink-0 px-4`}
+                      >
+                        <ProductCard product={product} index={index} />
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            )}
-          </div>
-
+              {/* Navigation Arrows */}
+              {featuredProducts.length > itemsPerSlide && (
+                <>
+                  <button
+                    onClick={prevSlide}
+                    disabled={currentSlide === 0}
+                    className="absolute top-1/2 -left-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <ArrowLeft className="h-6 w-6 text-gray-700" />
+                  </button>
+                  <button
+                    onClick={nextSlide}
+                    disabled={currentSlide >= maxSlides}
+                    className="absolute top-1/2 -right-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <ArrowRight className="h-6 w-6 text-gray-700" />
+                  </button>
+                </>
+              )}
+              {/* Dots Indicator */}
+              {featuredProducts.length > itemsPerSlide && (
+                <div className="flex justify-center mt-6 space-x-2">
+                  {Array.from({ length: maxSlides + 1 }).map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentSlide(index)}
+                      className={`w-3 h-3 rounded-full transition-colors ${
+                        currentSlide === index ? "bg-orange-500" : "bg-gray-300"
+                      }`}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
           {/* BUTTON VIEW ALL */}
           <div className="text-center mt-12">
             <Link
@@ -386,12 +410,14 @@ const Index = () => {
             </Link>
           </div>
         </div>
-      </section >
+      </section>
 
       {/* Marquee Section */}
-      <div className="w-full bg-gray-100 py-12 px-10" >
+      <div className="w-full bg-gray-100 py-12 px-10">
         <span className="flex justify-center mb-3">
-          <h2 className="mx-12 text-center font-bold font-plusJakartaSans text-black/60 ">Our brand trusted partners</h2>
+          <h2 className="mx-12 text-center font-bold font-plusJakartaSans text-black/60 ">
+            Our brand trusted partners
+          </h2>
         </span>
         <Marquee
           pauseOnHover
@@ -400,22 +426,13 @@ const Index = () => {
           <span className="mx-12">Zyfini Edukasi</span>
           <span className="mx-12">Propan</span>
         </Marquee>
-
-      </div >
+      </div>
 
       {/* Why Choose Us Section */}
-      <section className="bg-gray-50 py-10 px-10" >
+      <section className="bg-gray-50 py-10 px-10">
         <div className="font-mochiyPopOne text-[#1c2957] max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-          <div
-            id="why-choose-us-image"
-
-            data-animate
-          >
-            <img
-              src="https://toytime-theme.myshopify.com/cdn/shop/files/Mask_group_3514798e-7d90-4144-a900-c6b97e546f20.png?v=1707983159"
-              alt="Crafting furniture"
-              className="w-full h-full object-cover"
-            />
+          <div id="why-choose-us-image" data-animate>
+            
           </div>
           <div
             id="why-choose-us-content"
@@ -423,17 +440,18 @@ const Index = () => {
             data-animate
           >
             <h2 className="text-3xl text-gray-800 mb-5">
-              The Unique Appeal of <span className="text-orange-500 font-semibold">Zyfini Edukasi</span>  Wooden Creations
+              The Unique Appeal of{" "}
+              <span className="text-orange-500 font-semibold">
+                Zyfini Edukasi
+              </span>{" "}
+              Wooden Creations
             </h2>
 
             <p className="text-gray-600 mb-6">{t.whyChooseUs.description}</p>
             <ul className="space-y-8">
               {values.map((value, index) => (
                 <li key={index} className="flex items-start">
-                  <div className="flex-shrink-0">
-                    <img src={value.iconUrl} alt={value.title} className="w-10 h-10 text-orange-500" />
-
-                  </div>
+                  
                   <div className="ml-4 ">
                     <h4 className="px-3 text-lg text-gray-800">
                       {language === "en" ? value.title : value.titleId}
@@ -447,7 +465,7 @@ const Index = () => {
             </ul>
           </div>
         </div>
-      </section >
+      </section>
 
       <TestimonialsSection />
 
@@ -468,7 +486,7 @@ const Index = () => {
       </section>
 
       <Footer />
-    </div >
+    </div>
   );
 };
 

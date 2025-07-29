@@ -4,7 +4,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import TestimonialCard from '@/components/TestimonialCard';
 
 const TestimonialsSection: React.FC = () => {
-  const { language, t } = useLanguage();
+  const { language } = useLanguage();
 
   const testimonials = [
     {
@@ -53,13 +53,10 @@ const TestimonialsSection: React.FC = () => {
           {testimonials.map((testimonial, index) => (
             <TestimonialCard
               key={index}
-              name={testimonial.name}
-              nameId={testimonial.nameId}
+              name={language === 'en' ? testimonial.name : testimonial.nameId}
               location={language === 'en' ? testimonial.location : testimonial.locationId}
-              locationId={testimonial.locationId}
               rating={testimonial.rating}
               comment={language === 'en' ? testimonial.comment : testimonial.commentId}
-              commentId={testimonial.commentId}
               avatar={testimonial.avatar}
             />
           ))}

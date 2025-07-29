@@ -1,15 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Menu, X, Globe, ChevronDown, Search } from "lucide-react";
-import { Mochiy_Pop_One, Fredoka } from "next/font/google";
-
-const mochiyPopOne = Mochiy_Pop_One({
-  subsets: ["latin"],
-  weight: ["400"],
-});
+import { Fredoka } from "next/font/google";
 const fredoka = Fredoka({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -44,14 +40,7 @@ const Navbar = () => {
     { href: "/contact", label: t.nav.contact },
   ];
 
-  const categories = [
-    "APE Indoor",
-    "Ape Outdoor",
-    "Meja Kursi",
-    "Stand Usaha",
-    "Rak Buku",
-    "Papan Data",
-  ];
+  
 
   return (
     <nav className={`fixed w-full z-90 transition-all duration-300 ${navBg}`}>
@@ -60,10 +49,12 @@ const Navbar = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <div className="w-12 h-12 rounded-lg flex items-center justify-center overflow-hidden">
-              <img
+              <Image
                 src="/images/logonav.png"
                 alt="Logo Legowo"
-                className="object-contain w-full h-full"
+                width={48}
+                height={48}
+                className="object-contain"
               />
             </div>
             <span
@@ -131,10 +122,12 @@ const Navbar = () => {
                       className="flex flex-col items-center hover:bg-gray-100 rounded-md p-3 transition"
                       onClick={() => setIsDropdownOpen(false)}
                     >
-                      <img
+                      <Image
                         src={item.image}
                         alt={item.title}
-                        className="w-20 h-20 object-contain mb-2"
+                        width={80}
+                        height={80}
+                        className="object-contain mb-2"
                       />
                       <span
                         className={`text-center text-sm font-medium ${fredoka.className}`}

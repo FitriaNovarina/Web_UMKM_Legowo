@@ -1,6 +1,7 @@
 
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from 'lucide-react';
@@ -16,10 +17,12 @@ const Footer = () => {
           <div className="space-y-4 text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start space-x-2">
               <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-                <img
-                  src="/images/logonav.png" // ganti path ini sesuai dengan lokasi gambar Anda
+                <Image
+                  src="/images/logonav.png"
                   alt="Logo Legowo"
-                  className="object-contain w-full h-full"
+                  width={32}
+                  height={32}
+                  className="object-contain"
                 />
               </div>
               <span className="text-xl font-bold">Legowo</span>

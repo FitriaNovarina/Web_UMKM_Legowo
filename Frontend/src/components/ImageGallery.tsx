@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { ChevronLeft, ChevronRight, X, ZoomIn } from 'lucide-react';
 
 interface ImageGalleryProps {
@@ -23,10 +24,12 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images, alt }) => {
     <div className="space-y-4">
       {/* Main Image */}
       <div className="relative group">
-        <img
+        <Image
           src={images[currentIndex]}
           alt={alt}
-          className="w-full h-64 md:h-96 object-cover rounded-lg cursor-zoom-in"
+          layout="fill"
+          objectFit="cover"
+          className="rounded-lg cursor-zoom-in"
           onClick={() => setIsZoomOpen(true)}
         />
         
@@ -72,10 +75,11 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images, alt }) => {
                   : 'border-gray-200 hover:border-wood-300'
               }`}
             >
-              <img
+              <Image
                 src={image}
                 alt={`${alt} ${index + 1}`}
-                className="w-full h-full object-cover"
+                layout="fill"
+                objectFit="cover"
               />
             </button>
           ))}
@@ -94,10 +98,12 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images, alt }) => {
               <X size={24} />
             </button>
             
-            <img
+            <Image
               src={images[currentIndex]}
               alt={alt}
-              className="max-w-full max-h-full object-contain"
+              width={1200}
+              height={1200}
+              objectFit="contain"
             />
             
             {images.length > 1 && (

@@ -1,26 +1,21 @@
 
 import React from 'react';
+import Image from 'next/image';
 import { Star } from 'lucide-react';
 
 interface TestimonialCardProps {
   name: string;
-  nameId: string;
   location: string;
-  locationId: string;
   rating: number;
   comment: string;
-  commentId: string;
   avatar?: string;
 }
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({
   name,
-  nameId,
   location,
-  locationId,
   rating,
   comment,
-  commentId,
   avatar
 }) => {
   return (
@@ -28,7 +23,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       <div className="flex items-center mb-4">
         <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mr-4">
           {avatar ? (
-            <img src={avatar} alt={name} className="w-full h-full rounded-full object-cover" />
+            <Image src={avatar} alt={name} width={48} height={48} className="rounded-full object-cover" />
           ) : (
             <span className="text-amber-800 font-semibold text-lg">
               {name.charAt(0)}
@@ -53,7 +48,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         ))}
       </div>
       
-      <p className="text-gray-700 italic">"{comment}"</p>
+      <p className="text-gray-700 italic">&quot;{comment}&quot;</p>
     </div>
   );
 };

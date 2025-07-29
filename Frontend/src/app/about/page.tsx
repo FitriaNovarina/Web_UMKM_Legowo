@@ -1,5 +1,6 @@
 "use client";
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 
 import { Heart, Users, Handshake } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -17,19 +18,6 @@ const fredoka = Fredoka({
 });
 
 const AboutPage = () => {
-
-  const carouselRef = useRef<HTMLDivElement | null>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const moveSlide = (direction: number) => {
-    const carousel = carouselRef.current;
-    if (!carousel) return; // hindari null error
-
-    const slides = carousel.children.length;
-    if (slides === 0) return; // hindari pembagian dengan nol
-    const newIndex = (currentIndex + direction + slides) % slides;
-    setCurrentIndex(newIndex);
-    carousel.style.transform = `translateX(-${newIndex * 100}%)`;
-  };
 
 
   const stats = [
@@ -50,11 +38,7 @@ const AboutPage = () => {
     },
   ];
   const imageUrls = [
-    "https://www.plantoys.com/cdn/shop/files/5468_-_Main_-_sq.jpg?v=1736326555&width=720",
-    "https://www.plantoys.com/cdn/shop/files/5513_-_Main_-_sq.jpg?v=1736325206&width=720",
-    "https://www.plantoys.com/cdn/shop/files/3601_-_Main_-_sq.jpg?v=1740988991&width=720",
-    "https://www.plantoys.com/cdn/shop/files/5264_-_Main_-_sq.jpg?v=1737537624&width=720",
-    "https://www.plantoys.com/cdn/shop/files/4646_-_Main_-_sq.jpg?v=1737706381&width=720",
+    "/public/globe.svg",
   ];
 
   const [currentImage, setCurrentImage] = useState(0);
@@ -147,11 +131,13 @@ const AboutPage = () => {
           {/* Kanan: Gambar berubah setiap 4 detik */}
           <div className="relative w-full h-[500px] hidden md:flex items-center justify-center overflow-hidden">
             <div className="w-[60%] h-[60%] rounded-lg overflow-hidden ">
-              <img
+              <Image
                 key={currentImage}
                 src={imageUrls[currentImage]}
                 alt="Our Story"
-                className="w-full h-full object-cover transition-opacity duration-1000 ease-in-out"
+                layout="fill"
+                objectFit="cover"
+                className="transition-opacity duration-1000 ease-in-out"
               />
             </div>
           </div>
@@ -171,10 +157,12 @@ const AboutPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {/* Item 1 */}
             <div className="flex flex-col items-center">
-              <img
+              <Image
                 src="/images/s31.png"
                 alt="Open-Ended Play"
-                className="h-35 w-auto mb-6"
+                width={140}
+                height={140}
+                className="w-auto mb-6"
               />
               <p
                 className={`${mochiyPopOne.className}   text-[#ff5b35] font-semibold text-sm`}
@@ -185,10 +173,12 @@ const AboutPage = () => {
 
             {/* Item 2 */}
             <div className="flex flex-col items-center">
-              <img
+              <Image
                 src="/images/s32.png"
                 alt="Screen-Free Time"
-                className="h-35 w-auto mb-6"
+                width={140}
+                height={140}
+                className="w-auto mb-6"
               />
               <p
                 className={`${mochiyPopOne.className}   text-[#ff5b35] font-semibold text-sm break-words max-w-[130px]`}
@@ -199,10 +189,12 @@ const AboutPage = () => {
 
             {/* Item 3 */}
             <div className="flex flex-col items-center">
-              <img
+              <Image
                 src="/images/s33.png"
                 alt="Sustainably Made Toys"
-                className="h-35 w-auto mb-6"
+                width={140}
+                height={140}
+                className="w-auto mb-6"
               />
               <p
                 className={`${mochiyPopOne.className}   text-[#ff5b35] font-semibold text-sm  break-words max-w-[130px]`}
@@ -220,10 +212,12 @@ const AboutPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 items-center text-center md:text-left gap-8">
             {/* Left Icon */}
             <div className="flex justify-center md:justify-start">
-              <img
+              <Image
                 src="/images/rocket.png"
                 alt="Rocket Icon"
-                className="h-50 w-auto mt-40"
+                width={200}
+                height={200}
+                className="w-auto mt-40"
               />
             </div>
 
@@ -248,10 +242,12 @@ const AboutPage = () => {
 
             {/* Right Icon */}
             <div className="flex justify-center md:justify-end">
-              <img
+              <Image
                 src="/images/astronot.png"
                 alt="Astronaut Icon"
-                className="h-50 w-auto -mt-20"
+                width={200}
+                height={200}
+                className="w-auto -mt-20"
               />
             </div>
           </div>
@@ -270,10 +266,12 @@ const AboutPage = () => {
             {/* Card 1 */}
             <div className="bg-[#f9f9fb] p-6 rounded-2xl shadow-sm">
               <div className="flex justify-center mb-4">
-                <img
+                <Image
                   src="https://www.melissaanddoug.com/cdn/shop/files/OurStory_OpenEndedPlay_Doodles_Imaginative.png?v=1658947380&width=260"
                   alt="Sustainably Made Toys"
-                  className="h-28 w-auto mb-6"
+                  width={112}
+                  height={112}
+                  className="w-auto mb-6"
                 />
               </div>
               <h3
@@ -291,10 +289,12 @@ const AboutPage = () => {
             {/* Card 2 */}
             <div className="bg-[#f9f9fb] p-6 rounded-2xl shadow-sm">
               <div className="flex justify-center mb-4">
-                <img
+                <Image
                   src="https://www.melissaanddoug.com/cdn/shop/files/OurStory_OpenEndedPlay_Doodles_KidPowered.png?v=1658947381&width=260"
                   alt="Sustainably Made Toys"
-                  className="h-28 w-auto mb-6"
+                  width={112}
+                  height={112}
+                  className="w-auto mb-6"
                 />
               </div>
               <h3
@@ -311,10 +311,12 @@ const AboutPage = () => {
             {/* Card 3 */}
             <div className="bg-[#f9f9fb] p-6 rounded-2xl shadow-sm">
               <div className="flex justify-center mb-4">
-                <img
+                <Image
                   src="https://www.melissaanddoug.com/cdn/shop/files/OurStory_OpenEndedPlay_Doodles_SkillBuilding_6d36640f-91fb-4f7b-85a2-5900ef2548fe.png?v=1659036151&width=260"
                   alt="Sustainably Made Toys"
-                  className="h-28 w-auto mb-6"
+                  width={112}
+                  height={112}
+                  className="w-auto mb-6"
                 />
               </div>
               <h3
@@ -332,10 +334,12 @@ const AboutPage = () => {
             {/* Card 4 */}
             <div className="bg-[#f9f9fb] p-6 rounded-2xl shadow-sm">
               <div className="flex justify-center mb-4">
-                <img
+                <Image
                   src="https://www.melissaanddoug.com/cdn/shop/files/OurStory_OpenEndedPlay_Doodles_Fun_6f27ae62-01e7-4c92-b675-c4b1d556d9b9.png?v=1659036151&width=260"
                   alt="Sustainably Made Toys"
-                  className="h-28 w-auto mb-6"
+                  width={112}
+                  height={112}
+                  className="w-auto mb-6"
                 />
               </div>
               <h3
