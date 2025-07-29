@@ -1,7 +1,7 @@
 "use client";
 import { useRef, useEffect, useState } from "react";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { Award, Heart, Users, Leaf, Handshake } from "lucide-react";
+
+import { Heart, Users, Handshake } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FAQSection from "@/components/FAQSection";
@@ -17,7 +17,7 @@ const fredoka = Fredoka({
 });
 
 const AboutPage = () => {
-  const { t } = useLanguage();
+
   const carouselRef = useRef<HTMLDivElement | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const moveSlide = (direction: number) => {
@@ -25,49 +25,13 @@ const AboutPage = () => {
     if (!carousel) return; // hindari null error
 
     const slides = carousel.children.length;
+    if (slides === 0) return; // hindari pembagian dengan nol
     const newIndex = (currentIndex + direction + slides) % slides;
     setCurrentIndex(newIndex);
     carousel.style.transform = `translateX(-${newIndex * 100}%)`;
   };
 
-  const values = [
-    {
-      icon: Heart,
-      title: "Passion",
-      titleId: "Passion",
-      description:
-        "Every piece is crafted with love and dedication to traditional Indonesian woodworking.",
-      descriptionId:
-        "Setiap karya dibuat dengan cinta dan dedikasi terhadap kerajinan kayu tradisional Indonesia.",
-    },
-    {
-      icon: Award,
-      title: "Quality",
-      titleId: "Kualitas",
-      description:
-        "We use only the finest materials and time-tested techniques to ensure lasting beauty.",
-      descriptionId:
-        "Kami hanya menggunakan bahan terbaik dan teknik yang telah teruji waktu untuk memastikan keindahan yang tahan lama.",
-    },
-    {
-      icon: Leaf,
-      title: "Sustainability",
-      titleId: "Keberlanjutan",
-      description:
-        "Our commitment to eco-friendly practices protects the environment for future generations.",
-      descriptionId:
-        "Komitmen kami terhadap praktik ramah lingkungan melindungi lingkungan untuk generasi mendatang.",
-    },
-    {
-      icon: Users,
-      title: "Community",
-      titleId: "Komunitas",
-      description:
-        "We support local artisans and contribute to the preservation of traditional crafts.",
-      descriptionId:
-        "Kami mendukung pengrajin lokal dan berkontribusi pada pelestarian kerajinan tradisional.",
-    },
-  ];
+
   const stats = [
     {
       icon: Handshake,
@@ -98,10 +62,9 @@ const AboutPage = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % imageUrls.length);
-    }, 3000); // ganti setiap 4 detik
-
+    }, 4000); // Ganti gambar setiap 4 detik
     return () => clearInterval(interval);
-  }, []);
+  }, [imageUrls.length]);
 
   return (
     <div className="text-gray-800 min-h-screen bg-white overflow-x-hidden">
@@ -114,7 +77,6 @@ const AboutPage = () => {
 
         {/* Konten Tengah Hero */}
         <div className="flex flex-col items-center justify-center h-full z-10 relative text-center px-4">
-
           <h1 className="font-mochiyPopOne text-5xl md:text-6xl font-bold mb-4">
             Zyifini <span className="text-yellow-400">Edukasi</span>
           </h1>
@@ -129,9 +91,9 @@ const AboutPage = () => {
       <section>
         <div className="absolute top-20 left-1/2 transform -translate-x-1/2 translate-y-4/2 z-20">
           <div className="flex flex-col md:flex-row justify-center items-center gap-6 px-4">
-            {stats.map((stat, index) => (
+            {stats.map((stat) => (
               <div
-                key={index}
+                key={stat.label}
                 className="bg-white rounded-md shadow-lg w-56 p-4 text-center hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 group"
               >
                 <div className="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-orange-600 to-yellow-300 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
