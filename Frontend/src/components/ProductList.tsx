@@ -18,14 +18,18 @@ interface ProductListProps {
   selectedCategory?: string;
   sortOption?: string;
   searchQuery?: string | null;
+  currentPage: number;
+  perPage: number;
+  setTotalPages: (count: number) => void;
 }
 
-export default function ProductList({ selectedCategory, sortOption, searchQuery }: ProductListProps) {
-  const [products, setProducts] = useState<APIProduct[]>([])
-  const [loading, setLoading] = useState(true)
+export default function ProductList({ selectedCategory, sortOption, searchQuery, currentPage, perPage, setTotalPages }: ProductListProps) {
+  const [products, setProducts] = useState<APIProduct[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const params = new URLSearchParams();
         if (selectedCategory && selectedCategory !== 'Semua') {
@@ -34,43 +38,48 @@ export default function ProductList({ selectedCategory, sortOption, searchQuery 
         if (searchQuery) {
           params.append('search', searchQuery);
         }
+        params.append('page', currentPage.toString());
+        params.append('per_page', perPage.toString());
 
         const url = `/api/produk?${params.toString()}`;
         const res = await fetch(url, { cache: 'no-store' });
         const data = await res.json();
-        // Ensure data is an array before setting state
-        if (Array.isArray(data)) {
-          setProducts(data);
+        
+        if (data && Array.isArray(data.data)) {
+          setProducts(data.data);
+          setTotalPages(data.last_page);
         } else {
-          // If API returns something else (e.g., on no results), set an empty array
           setProducts([]);
+          setTotalPages(1);
         }
-        setLoading(false);
       } catch (error) {
         console.error('Gagal fetch produk:', error);
+        setProducts([]);
+        setTotalPages(1);
+      } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory, searchQuery, currentPage, perPage, setTotalPages]);
 
-  if (loading) return <p>Loading katalog produk...</p>
+  if (loading) return <p>Loading katalog produk...</p>;
 
-  const sortedProducts = [...products]
-
-  if (sortOption === 'harga_asc') {
-    sortedProducts.sort((a, b) => a.harga - b.harga)
-  } else if (sortOption === 'harga_desc') {
-    sortedProducts.sort((a, b) => b.harga - a.harga)
-  } else if (sortOption === 'nama_asc') {
-    sortedProducts.sort((a, b) => a.nama.localeCompare(b.nama))
-  } else if (sortOption === 'nama_desc') {
-    sortedProducts.sort((a, b) => b.nama.localeCompare(a.nama))
+  if (!products || products.length === 0) {
+    return <p className="text-center py-8">Tidak ada produk yang tersedia</p>;
   }
 
-  if (sortedProducts.length === 0) {
-    return <p className="text-center py-8">Tidak ada produk yang tersedia</p>;
+  const sortedProducts = [...products];
+
+  if (sortOption === 'harga_asc') {
+    sortedProducts.sort((a, b) => a.harga - b.harga);
+  } else if (sortOption === 'harga_desc') {
+    sortedProducts.sort((a, b) => b.harga - a.harga);
+  } else if (sortOption === 'nama_asc') {
+    sortedProducts.sort((a, b) => a.nama.localeCompare(b.nama));
+  } else if (sortOption === 'nama_desc') {
+    sortedProducts.sort((a, b) => b.nama.localeCompare(a.nama));
   }
 
   return (
@@ -91,10 +100,10 @@ export default function ProductList({ selectedCategory, sortOption, searchQuery 
           weight: 0,
           inStock: product.stok > 0,
           featured: false,
-        }
+        };
 
-        return <ProductCard key={mapped.id} product={mapped} index={index} />
+        return <ProductCard key={mapped.id} product={mapped} index={index} />;
       })}
     </div>
-  )
+  );
 }

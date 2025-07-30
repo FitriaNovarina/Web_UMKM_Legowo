@@ -44,7 +44,13 @@ class ProdukController extends Controller
             $query->where('nama', 'like', '%' . $search . '%');
         }
 
-        return response()->json($query->get());
+        $perPage = $request->query('per_page', 25);
+        $allowedPerpage = [10,25,50,100];
+        if (!in_array($perPage, $allowedPerpage)){
+            $perPage = 25;
+        }
+
+        return response()->json($query->paginate($perPage));
     }
 
     public function kategori()

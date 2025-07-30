@@ -70,7 +70,7 @@ const Navbar = () => {
             <span
               className={`${fredoka.className} text-3xl font-bold text-white mb-1`}
             >
-              Zyifini Edukasi
+              Legowo
             </span>
           </Link>
 
