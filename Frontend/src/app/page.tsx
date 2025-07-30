@@ -202,7 +202,7 @@ const Index = () => {
             className="group relative inline-flex items-center px-6 md:px-8 py-2 bg-orange-500 rounded-full overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
           >
             {/* Efek putih membesar dari kanan */}
-            <span className="absolute right-2 w-12 h-12 bg-white rounded-full z-0 transition-all duration-500 ease-in-out group-hover:w-54 group-hover:right-2"></span>
+            <span className="absolute right-2 w-12 h-12 bg-white rounded-full z-0 transition-all duration-500 ease-in-out group-hover:w-54 group-hover:right-4"></span>
 
             {/* Teks tombol */}
             <span className="font-mochiyPopOne relative z-10 text-white font-semibold transition-colors duration-500 group-hover:text-orange-500">
@@ -277,8 +277,8 @@ const Index = () => {
               <Image
                 src="/images/3-5.png"
                 alt="3-5 years"
-                width={140}
-                height={140}
+                width={115}
+                height={115}
                 className="object-contain mb-2"
               />
               <span className="bg-amber-400 text-white px-4 py-2 rounded-full text-sm font-medium group-hover:opacity-90">
@@ -291,8 +291,8 @@ const Index = () => {
               <Image
                 src="/images/6-8.png"
                 alt="6-8 years"
-                width={140}
-                height={140}
+                width={130}
+                height={130}
                 className="object-contain mb-2"
               />
               <span className="bg-green-400 text-white px-4 py-2 rounded-full text-sm font-medium group-hover:opacity-90">
@@ -339,9 +339,8 @@ const Index = () => {
                 <div
                   className="flex transition-transform duration-300 ease-in-out"
                   style={{
-                    transform: `translateX(-${
-                      currentSlide * (100 / itemsPerSlide)
-                    }%)`,
+                    transform: `translateX(-${currentSlide * (100 / itemsPerSlide)
+                      }%)`,
                   }}
                   onTouchStart={handleTouchStart}
                   onTouchMove={handleTouchMove}
@@ -352,8 +351,8 @@ const Index = () => {
                       itemsPerSlide === 1
                         ? "w-full"
                         : itemsPerSlide === 2
-                        ? "w-1/2"
-                        : "w-1/4";
+                          ? "w-1/2"
+                          : "w-1/4";
                     return (
                       <div
                         key={product.id}
@@ -391,9 +390,8 @@ const Index = () => {
                     <button
                       key={index}
                       onClick={() => setCurrentSlide(index)}
-                      className={`w-3 h-3 rounded-full transition-colors ${
-                        currentSlide === index ? "bg-orange-500" : "bg-gray-300"
-                      }`}
+                      className={`w-3 h-3 rounded-full transition-colors ${currentSlide === index ? "bg-orange-500" : "bg-gray-300"
+                        }`}
                     />
                   ))}
                 </div>
@@ -432,7 +430,11 @@ const Index = () => {
       <section className="bg-gray-50 py-10 px-10">
         <div className="font-mochiyPopOne text-[#1c2957] max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
           <div id="why-choose-us-image" data-animate>
-            
+            <img
+              src="https://toytime-theme.myshopify.com/cdn/shop/files/Mask_group_3514798e-7d90-4144-a900-c6b97e546f20.png?v=1707983159"
+              alt="Crafting furniture"
+              className="w-full h-full object-cover"
+            />
           </div>
           <div
             id="why-choose-us-content"
@@ -451,7 +453,7 @@ const Index = () => {
             <ul className="space-y-8">
               {values.map((value, index) => (
                 <li key={index} className="flex items-start">
-                  
+
                   <div className="ml-4 ">
                     <h4 className="px-3 text-lg text-gray-800">
                       {language === "en" ? value.title : value.titleId}
