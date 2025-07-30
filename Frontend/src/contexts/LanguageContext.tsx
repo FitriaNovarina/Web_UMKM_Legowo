@@ -27,27 +27,27 @@ const translations = {
     },
     search: "Search products...",
     hero: {
-      title: "Education Zyfini",
+      title: "Legowo",
       subtitle:
         "UMKM Legowo is a local craftsman that offers a variety of educational products and children's furniture made from wood — ranging from indoor and outdoor play equipment, children's tables and chairs, business stands, to bookshelves and tables.",
       cta: "View Collection",
     },
     featuredProducts: {
       titlePart1: "Yuk kenalan dengan",
-      brandName: "Zyifini Edukasi",
+      brandName: "Legowo",
       titlePart2: "Tempatnya Mainan Anak yang",
       highlight: "Mendidik, Aman,",
       punctuation: "dan",
       titlePart3: "Penuh Warna.",
       viewAll: "View All",
     },
-    baby : {
+    baby: {
       title: "FUN FOR",
       ages: "ALL AGES",
       description: "Toys for kids of every age, stage, and ability!",
     },
     whyChooseUs: {
-      title: " The Unique Appeal of Zyfini Edukasi Wooden Creations",
+      title: " The Unique Appeal of Legowo Wooden Creations",
       description:
         "We are committed to providing the best quality products for our customers.",
     },
@@ -62,7 +62,7 @@ const translations = {
       categories: "Product Categories",
       story: "Our Story",
       storyText:
-        "Born from a passion for traditional Indonesian craftsmanship, Zyfini Edukasi creates beautiful wooden pieces that tell stories of heritage and artistry.",
+        "Born from a passion for traditional Indonesian craftsmanship, Legowo creates beautiful wooden pieces that tell stories of heritage and artistry.",
       values: "Our Values",
       newsletter: "Stay Updated",
       newsletterText:
@@ -91,7 +91,7 @@ const translations = {
       papanData: "Papan Data",
     },
     about: {
-      title: "About Zyfini Edukasi",
+      title: "About Legowo",
       vision: "Our Vision",
       mission: "Our Mission",
       story: "Our Story",
@@ -125,21 +125,21 @@ const translations = {
     },
     search: "Cari produk...",
     hero: {
-      title: "Zyfini Edukasi",
+      title: "Legowo",
       subtitle:
         "UMKM Legowo adalah pengrajin lokal yang menghadirkan berbagai produk edukatif dan furnitur anak-anak dari kayu — mulai dari APE Indoor, APE Outdoor, Meja Kursi Anak, Stand Usaha, hingga Rak Buku dan meja",
       cta: "Lihat Koleksi",
     },
     featuredProducts: {
       titlePart1: "Yuk kenalan dengan",
-      brandName: "Zyfini Edukasi",
+      brandName: "Legowo",
       titlePart2: "Tempatnya Mainan Anak yang",
       highlight: "Mendidik, Aman,",
       punctuation: "dan",
       titlePart3: "Penuh Warna.",
       viewAll: "Lihat Semua",
     },
-    baby : {
+    baby: {
       title: "MENYENANGKAN UNTUK",
       ages: "SEMUA USIA",
       description: "Mainan untuk anak-anak setiap usia, tahap, dan keterampilan!",
@@ -160,7 +160,7 @@ const translations = {
       categories: "Kategori Produk",
       story: "Cerita Kami",
       storyText:
-        "Lahir dari passion terhadap kerajinan tradisional Indonesia, Zyfini Edukasi menciptakan karya kayu indah yang bercerita tentang warisan dan seni.",
+        "Lahir dari passion terhadap kerajinan tradisional Indonesia, Legowo menciptakan karya kayu indah yang bercerita tentang warisan dan seni.",
       values: "Nilai-Nilai Kami",
       newsletter: "Tetap Terhubung",
       newsletterText:
@@ -189,7 +189,7 @@ const translations = {
       papanData: "Papan Data",
     },
     about: {
-      title: "Tentang Zyfini Edukasi",
+      title: "Tentang Legowo",
       vision: "Visi Kami",
       mission: "Misi Kami",
       story: "Cerita Kami",
