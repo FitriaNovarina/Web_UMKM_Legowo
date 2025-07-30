@@ -25,6 +25,7 @@ const translations = {
       about: "About",
       contact: "Contact",
     },
+    search: "Search products...",
     hero: {
       title: "Education Zyfini",
       subtitle:
@@ -122,6 +123,7 @@ const translations = {
       about: "Tentang",
       contact: "Kontak",
     },
+    search: "Cari produk...",
     hero: {
       title: "Zyfini Edukasi",
       subtitle:

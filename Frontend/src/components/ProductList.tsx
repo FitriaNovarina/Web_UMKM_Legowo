@@ -17,31 +17,43 @@ interface APIProduct {
 interface ProductListProps {
   selectedCategory?: string;
   sortOption?: string;
+  searchQuery?: string | null;
 }
 
-export default function ProductList({ selectedCategory, sortOption }: ProductListProps) {
+export default function ProductList({ selectedCategory, sortOption, searchQuery }: ProductListProps) {
   const [products, setProducts] = useState<APIProduct[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = selectedCategory && selectedCategory !== 'Semua'
-          ? `/api/produk?kategori=${encodeURIComponent(selectedCategory)}`
-          : '/api/produk';
+        const params = new URLSearchParams();
+        if (selectedCategory && selectedCategory !== 'Semua') {
+          params.append('kategori', selectedCategory);
+        }
+        if (searchQuery) {
+          params.append('search', searchQuery);
+        }
 
-        const res = await fetch(url, { cache: 'no-store' })
-        const data = await res.json()
-        setProducts(data)
-        setLoading(false)
+        const url = `/api/produk?${params.toString()}`;
+        const res = await fetch(url, { cache: 'no-store' });
+        const data = await res.json();
+        // Ensure data is an array before setting state
+        if (Array.isArray(data)) {
+          setProducts(data);
+        } else {
+          // If API returns something else (e.g., on no results), set an empty array
+          setProducts([]);
+        }
+        setLoading(false);
       } catch (error) {
-        console.error('Gagal fetch produk:', error)
-        setLoading(false)
+        console.error('Gagal fetch produk:', error);
+        setLoading(false);
       }
-    }
+    };
 
-    fetchData()
-  }, [selectedCategory])
+    fetchData();
+  }, [selectedCategory, searchQuery]);
 
   if (loading) return <p>Loading katalog produk...</p>
 

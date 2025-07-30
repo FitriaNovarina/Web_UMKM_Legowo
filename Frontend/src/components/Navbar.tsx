@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Menu, X, Globe, ChevronDown, Search } from "lucide-react";
 import { Fredoka } from "next/font/google";
@@ -17,6 +17,8 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { language, toggleLanguage, t } = useLanguage();
+  const [searchQuery, setSearchQuery] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     if (pathname !== "/") return; // <== Hanya jalankan scroll effect di halaman index
@@ -39,6 +41,14 @@ const Navbar = () => {
     { href: "/about", label: t.nav.about },
     { href: "/contact", label: t.nav.contact },
   ];
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery(""); // Optionally clear search bar after search
+    }
+  };
 
   
 
@@ -65,8 +75,9 @@ const Navbar = () => {
           </Link>
 
           {/* Search + Category Dropdown */}
+          <form onSubmit={handleSearch} className="flex-grow px-10 py-2 flex justify-center">
           <div
-            className={`hidden md:flex items-center w-[40%] rounded-full ${isScrolled
+            className={`hidden md:flex items-center w-[90%] rounded-full ${isScrolled
               ? "bg-white/10 backdrop-blur-md shadow-md border border-transparent"
               : "bg-transparent backdrop-blur-0 shadow-none border-[1px] border-white/90"
               }`}
@@ -144,19 +155,23 @@ const Navbar = () => {
             {/* Search Input */}
             <input
               type="text"
-              placeholder="Search"
+              placeholder={t.search}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className={`flex-grow px-4 py-2 bg-transparent text-white placeholder-white focus:outline-none ${fredoka.className}`}
               style={{ border: "none", boxShadow: "none" }}
             />
 
             {/* Search Icon Button */}
             <button
+              type="submit"
               className="rounded-full p-2 hover:bg-white/10 transition"
               style={{ backgroundColor: "transparent", border: "none" }}
             >
               <Search size={18} color="white" />
             </button>
           </div>
+          </form>
 
           {/* Navigation Menu */}
           <div className="hidden md:flex items-center space-x-6">

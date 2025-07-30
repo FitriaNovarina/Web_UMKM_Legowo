@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { X, Loader2 } from "lucide-react";
 import ProductList from "@/components/ProductList";
 
@@ -11,25 +11,18 @@ interface Category {
 }
 
 export default function ProductPageClient() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const categoryFromURL = searchParams.get("kategori");
+  const searchQuery = searchParams.get("search");
 
-  const [filters, setFilters] = useState<string[]>([]);
+
   const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [sortOption, setSortOption] = useState<string>('nama_asc');
 
-  useEffect(() => {
-    if (categoryFromURL) {
-      setFilters([categoryFromURL]);
-    } else {
-      setFilters(["All"]);
-    }
-  }, [categoryFromURL]);
-
-  const selectedCategory =
-    filters.includes("All") || filters.length === 0 ? undefined : filters[0];
+  const selectedCategory = categoryFromURL && categoryFromURL !== 'All' ? categoryFromURL : undefined;
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -64,11 +57,28 @@ export default function ProductPageClient() {
     fetchCategories();
   }, []);
 
-  const removeFilter = (filter: string) => {
-    setFilters((prev) => prev.filter((f) => f !== filter));
+  const handleFilterChange = (type: 'kategori' | 'search', value: string | null) => {
+    const params = new URLSearchParams(window.location.search);
+
+    if (type === 'kategori') {
+      // When a category is selected, always clear the search
+      params.delete('search');
+      if (value && value !== 'All') {
+        params.set('kategori', value);
+      } else {
+        // If 'All' is selected or the current category is removed, delete the param
+        params.delete('kategori');
+      }
+    } else if (type === 'search') {
+      // When search is cleared
+      if (value === null) {
+        params.delete('search');
+      }
+    }
+    router.push(`/products?${params.toString()}`);
   };
 
-  const clearAll = () => setFilters([]);
+
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -76,9 +86,9 @@ export default function ProductPageClient() {
       <aside className="space-y-6">
         <div className="flex justify-between items-center mb-2">
           <h3 className="font-mochiyPopOne text-xl font-bold">Filter:</h3>
-          {filters.length > 0 && (
+          {(categoryFromURL || searchQuery) && (
             <button
-              onClick={clearAll}
+              onClick={() => router.push('/products')}
               className="text-sm text-black hover:underline"
             >
               Remove all
@@ -86,22 +96,33 @@ export default function ProductPageClient() {
           )}
         </div>
 
-        {filters.length > 0 && (
+        {(categoryFromURL || searchQuery) && (
           <div className="flex flex-wrap gap-2 mb-4">
-            {filters.map((f) => (
-              <span
-                key={f}
-                className="bg-white border border-gray-300 rounded-full px-3 py-1 flex items-center text-sm"
-              >
-                {f}
+            {searchQuery && (
+              <span className="bg-white border border-gray-300 rounded-full px-3 py-1 flex items-center text-sm">
+                {`Search: "${searchQuery}"`}
                 <button
-                  onClick={() => removeFilter(f)}
+                  onClick={() => handleFilterChange('search', null)}
                   className="ml-2 text-gray-500 hover:text-black"
                 >
                   <X size={12} />
                 </button>
               </span>
-            ))}
+            )}
+            {categoryFromURL && categoryFromURL !== 'All' && (
+              <span
+                key={categoryFromURL}
+                className="bg-white border border-gray-300 rounded-full px-3 py-1 flex items-center text-sm"
+              >
+                {categoryFromURL}
+                <button
+                  onClick={() => handleFilterChange('kategori', null)} // Set to null to remove
+                  className="ml-2 text-gray-500 hover:text-black"
+                >
+                  <X size={12} />
+                </button>
+              </span>
+            )}
           </div>
         )}
 
@@ -122,8 +143,8 @@ export default function ProductPageClient() {
                   type="radio"
                   name="category"
                   className="accent-amber-500 mr-2"
-                  checked={filters.length === 0 || filters.includes("All")}
-                  onChange={() => setFilters(["All"])}
+                  checked={!categoryFromURL || categoryFromURL === 'All'}
+                  onChange={() => handleFilterChange('kategori', 'All')}
                 />
                 All
               </label>
@@ -133,8 +154,8 @@ export default function ProductPageClient() {
                     type="radio"
                     name="category"
                     className="accent-amber-500 mr-2"
-                    checked={filters[0] === category.name}
-                    onChange={() => setFilters([category.name])}
+                    checked={categoryFromURL === category.name}
+                    onChange={() => handleFilterChange('kategori', category.name)}
                   />
                   {category.name}
                 </label>
@@ -163,7 +184,7 @@ export default function ProductPageClient() {
           </div>
         </div>
 
-        <ProductList selectedCategory={selectedCategory} sortOption={sortOption} />
+        <ProductList selectedCategory={selectedCategory} sortOption={sortOption} searchQuery={searchQuery} />
       </main>
     </div>
   );

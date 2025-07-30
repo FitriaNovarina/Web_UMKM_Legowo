@@ -29,6 +29,8 @@ class ProdukController extends Controller
         ];
 
 
+        $search = $request->query('search');
+
         $query = Produk::query();
 
         if ($kategori && $kategori !== 'Semua') {
@@ -36,6 +38,10 @@ class ProdukController extends Controller
                 return response()->json(['error' => 'kategori tidak valid'], 400);
             }
             $query->where('kategori', $kategori);
+        }
+
+        if ($search) {
+            $query->where('nama', 'like', '%' . $search . '%');
         }
 
         return response()->json($query->get());

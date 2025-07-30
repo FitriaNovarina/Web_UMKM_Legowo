@@ -4,10 +4,17 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const kategori = searchParams.get('kategori');
+  const search = searchParams.get('search');
 
-  const apiUrl = kategori
-    ? `http://127.0.0.1:8000/api/produk?kategori=${encodeURIComponent(kategori)}`
-    : 'http://127.0.0.1:8000/api/produk';
+  const params = new URLSearchParams();
+  if (kategori) {
+    params.append('kategori', kategori);
+  }
+  if (search) {
+    params.append('search', search);
+  }
+
+  const apiUrl = `http://127.0.0.1:8000/api/produk?${params.toString()}`;
 
   try {
     const res = await fetch(apiUrl);
