@@ -73,7 +73,7 @@ class ProdukController extends Controller
             'kategori' => 'required',
             'harga' => 'required|integer',
             'deskripsi' => 'nullable',
-            'gambar' => 'nullable|image',
+            'gambar' => 'nullable|image', 'max:5120'
         ]);
 
         if ($request->hasFile('gambar')) {
