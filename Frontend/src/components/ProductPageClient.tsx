@@ -21,16 +21,16 @@ export default function ProductPageClient() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [sortOption, setSortOption] = useState<string>('nama_asc');
-  const [currentPage, setCurrentPage] = useState(Number(searchParams.get('page')) || 1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [perPage, setPerPage] = useState(Number(searchParams.get('per_page')) || 25);
+  // const [currentPage, setCurrentPage] = useState(Number(searchParams.get('page')) || 1);
+  // const [totalPages, setTotalPages] = useState(1);
+  // const [perPage, setPerPage] = useState(Number(searchParams.get('per_page')) || 25);
 
   const selectedCategory = categoryFromURL && categoryFromURL !== 'All' ? categoryFromURL : undefined;
 
-  useEffect(() => {
-    setCurrentPage(Number(searchParams.get('page')) || 1);
-    setPerPage(Number(searchParams.get('per_page')) || 25);
-  }, [searchParams]);
+  // useEffect(() => {
+  //   setCurrentPage(Number(searchParams.get('page')) || 1);
+  //   setPerPage(Number(searchParams.get('per_page')) || 25);
+  // }, [searchParams]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -49,7 +49,7 @@ export default function ProductPageClient() {
         const data = await response.json();
 
         if (Array.isArray(data)) {
-            setCategories(data.map((name, id) => ({ id, name })));
+          setCategories(data.map((name, id) => ({ id, name })));
         } else if (data && Array.isArray(data.data)) {
           setCategories(data.data);
         } else {
@@ -86,19 +86,19 @@ export default function ProductPageClient() {
     router.push(`/products?${params.toString()}`);
   };
 
-  const handlePageChange = (page: number) => {
-    const params = new URLSearchParams(window.location.search);
-    params.set('page', page.toString());
-    router.push(`/products?${params.toString()}`);
-  };
+  // const handlePageChange = (page: number) => {
+  //   const params = new URLSearchParams(window.location.search);
+  //   params.set('page', page.toString());
+  //   router.push(`/products?${params.toString()}`);
+  // };
 
-  const handlePerPageChange = (value: number) => {
-    setPerPage(value);
-    const params = new URLSearchParams(window.location.search);
-    params.set('per_page', value.toString());
-    params.set('page', '1'); // Reset to first page
-    router.push(`/products?${params.toString()}`);
-  };
+  // const handlePerPageChange = (value: number) => {
+  //   setPerPage(value);
+  //   const params = new URLSearchParams(window.location.search);
+  //   params.set('per_page', value.toString());
+  //   params.set('page', '1'); // Reset to first page
+  //   router.push(`/products?${params.toString()}`);
+  // };
 
 
 
@@ -198,6 +198,7 @@ export default function ProductPageClient() {
               Sort by:
             </span>
             <select onChange={(e) => setSortOption(e.target.value)} value={sortOption}>
+              <option value="terbaru">Newest Product</option>
               <option value="harga_asc">Price: Low to High</option>
               <option value="harga_desc">Price: High to Low</option>
               <option value="nama_asc">Alphabetically, A–Z</option>
@@ -206,44 +207,8 @@ export default function ProductPageClient() {
           </div>
         </div>
 
-        <ProductList 
-          selectedCategory={selectedCategory} 
-          sortOption={sortOption} 
-          searchQuery={searchQuery} 
-          currentPage={currentPage}
-          perPage={perPage}
-          setTotalPages={setTotalPages}
-        />
+        <ProductList selectedCategory={selectedCategory} sortOption={sortOption} searchQuery={searchQuery} />
 
-        {/* Pagination Controls */}
-        <div className="flex justify-between items-center mt-6">
-          <div>
-            <span className="mr-2">Items per page:</span>
-            <select onChange={(e) => handlePerPageChange(Number(e.target.value))} value={perPage}>
-              <option value={10}>10</option>
-              <option value={25}>25</option>
-              <option value={50}>50</option>
-              <option value={100}>100</option>
-            </select>
-          </div>
-          <div className="flex items-center">
-            <button 
-              onClick={() => handlePageChange(currentPage - 1)} 
-              disabled={currentPage <= 1}
-              className="px-4 py-2 border rounded disabled:opacity-50"
-            >
-              Previous
-            </button>
-            <span className="px-4">Page {currentPage} of {totalPages}</span>
-            <button 
-              onClick={() => handlePageChange(currentPage + 1)} 
-              disabled={currentPage >= totalPages}
-              className="px-4 py-2 border rounded disabled:opacity-50"
-            >
-              Next
-            </button>
-          </div>
-        </div>
       </main>
     </div>
   );

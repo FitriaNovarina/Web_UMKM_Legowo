@@ -20,7 +20,7 @@
                         'ape outdoor' => 'APE Outdoor',
                         'kursi meja' => 'Kursi Meja',
                         'papan data' => 'Papan Data',
-                        'stand usaha' => 'Stand Usaha',
+                        'home decor' => 'Home Decor',
                         'rak buku' => 'Rak Buku',
                     ];
                 @endphp

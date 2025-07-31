@@ -25,7 +25,7 @@ class ProdukController extends Controller
             'Kursi Meja',
             'Papan Data',
             'Rak Buku',
-            'Stand Usaha',
+            'Home Decor',
         ];
 
 
@@ -43,12 +43,12 @@ class ProdukController extends Controller
         if ($search) {
             $query->where('nama', 'like', '%' . $search . '%');
         }
-
-        $perPage = $request->query('per_page', 25);
-        $allowedPerpage = [10,25,50,100];
-        if (!in_array($perPage, $allowedPerpage)){
-            $perPage = 25;
-        }
+return response()->json($query->get());
+        // $perPage = $request->query('per_page', 25);
+        // $allowedPerpage = [10,25,50,100];
+        // if (!in_array($perPage, $allowedPerpage)){
+        //     $perPage = 25;
+        // }
 
         return response()->json($query->paginate($perPage));
     }
@@ -61,7 +61,7 @@ class ProdukController extends Controller
             'Kursi Meja',
             'Papan Data',
             'Rak Buku',
-            'Stand Usaha'
+            'Home Decor'
 
     ]);
 }

@@ -23,7 +23,7 @@
                     <option value="ape indoor">APE Indoor</option>
                     <option value="ape outdoor">APE Outdoor</option>
                     <option value="kursi meja">Kursi Meja</option>
-                    <option value="stand usaha">Stand Usaha</option>
+                    <option value="home decor">Home Decor</option>
                     <option value="rak buku">Rak Buku</option>
                     <option value="papan data">Papan Data</option>
 

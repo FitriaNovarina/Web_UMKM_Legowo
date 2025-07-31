@@ -18,18 +18,16 @@ interface ProductListProps {
   selectedCategory?: string;
   sortOption?: string;
   searchQuery?: string | null;
-  currentPage: number;
-  perPage: number;
-  setTotalPages: (count: number) => void;
 }
 
-export default function ProductList({ selectedCategory, sortOption, searchQuery, currentPage, perPage, setTotalPages }: ProductListProps) {
-  const [products, setProducts] = useState<APIProduct[]>([]);
-  const [loading, setLoading] = useState(true);
+export default function ProductList({ selectedCategory, sortOption, searchQuery }: ProductListProps) {
+  const [products, setProducts] = useState<APIProduct[]>([])
+  const [loading, setLoading] = useState(true)
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 6
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
       try {
         const params = new URLSearchParams();
         if (selectedCategory && selectedCategory !== 'Semua') {
@@ -38,72 +36,91 @@ export default function ProductList({ selectedCategory, sortOption, searchQuery,
         if (searchQuery) {
           params.append('search', searchQuery);
         }
-        params.append('page', currentPage.toString());
-        params.append('per_page', perPage.toString());
 
         const url = `/api/produk?${params.toString()}`;
         const res = await fetch(url, { cache: 'no-store' });
         const data = await res.json();
-        
-        if (data && Array.isArray(data.data)) {
-          setProducts(data.data);
-          setTotalPages(data.last_page);
+
+        if (Array.isArray(data)) {
+          const sorted = data.sort((a, b) => b.id - a.id); // Default: produk terbaru di atas
+          setProducts(sorted);
         } else {
           setProducts([]);
-          setTotalPages(1);
         }
+        setLoading(false);
       } catch (error) {
         console.error('Gagal fetch produk:', error);
-        setProducts([]);
-        setTotalPages(1);
-      } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [selectedCategory, searchQuery, currentPage, perPage, setTotalPages]);
+  }, [selectedCategory, searchQuery]);
 
   if (loading) return <p>Loading katalog produk...</p>;
 
-  if (!products || products.length === 0) {
-    return <p className="text-center py-8">Tidak ada produk yang tersedia</p>;
-  }
+  let sortedProducts = [...products];
 
-  const sortedProducts = [...products];
-
-  if (sortOption === 'harga_asc') {
+  if (sortOption === "harga_asc") {
     sortedProducts.sort((a, b) => a.harga - b.harga);
-  } else if (sortOption === 'harga_desc') {
+  } else if (sortOption === "harga_desc") {
     sortedProducts.sort((a, b) => b.harga - a.harga);
-  } else if (sortOption === 'nama_asc') {
+  } else if (sortOption === "nama_asc") {
     sortedProducts.sort((a, b) => a.nama.localeCompare(b.nama));
-  } else if (sortOption === 'nama_desc') {
+  } else if (sortOption === "nama_desc") {
     sortedProducts.sort((a, b) => b.nama.localeCompare(a.nama));
+  } else if (sortOption === "terbaru") {
+    sortedProducts.sort((a, b) => b.id - a.id);
   }
+
+  const totalItems = sortedProducts.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedProducts = sortedProducts.slice(startIndex, startIndex + itemsPerPage);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      {sortedProducts.map((product, index) => {
-        const mapped: ProductCardType = {
-          id: String(product.id),
-          name_id: product.nama,
-          name_en: product.nama,
-          description_id: product.deskripsi,
-          description_en: product.deskripsi,
-          images: [`http://127.0.0.1:8000/uploads/${product.gambar}`],
-          category: product.kategori,
-          price: product.harga,
-          ageRange: '',
-          dimensions: { length: 0, width: 0, height: 0 },
-          materials: [],
-          weight: 0,
-          inStock: product.stok > 0,
-          featured: false,
-        };
+    <div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-6">
+        {paginatedProducts.map((product, index) => {
+          const mapped: ProductCardType = {
+            id: String(product.id),
+            name_id: product.nama,
+            name_en: product.nama,
+            description_id: product.deskripsi,
+            description_en: product.deskripsi,
+            images: [`http://127.0.0.1:8000/uploads/${product.gambar}`],
+            category: product.kategori,
+            price: product.harga,
+            ageRange: '',
+            dimensions: { length: 0, width: 0, height: 0 },
+            materials: [],
+            weight: 0,
+            inStock: product.stok > 0,
+            featured: false,
+          };
 
-        return <ProductCard key={mapped.id} product={mapped} index={index} />;
-      })}
+          return <ProductCard key={mapped.id} product={mapped} index={index} />;
+        })}
+      </div>
+
+      {/* Paginasi */}
+      <div className="flex justify-center gap-4">
+        <button
+          className="px-4 py-2 border rounded disabled:opacity-50"
+          disabled={currentPage === 1}
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+        >
+          Sebelumnya
+        </button>
+        <span className="py-2">Halaman {currentPage} dari {totalPages}</span>
+        <button
+          className="px-4 py-2 border rounded disabled:opacity-50"
+          disabled={currentPage === totalPages}
+          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+        >
+          Berikutnya
+        </button>
+      </div>
     </div>
   );
 }
