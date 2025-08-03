@@ -13,8 +13,8 @@ export async function GET(request: NextRequest) {
   if (search) {
     params.append('search', search);
   }
-
-  const apiUrl = `http://127.0.0.1:8000/api/produk?${params.toString()}`;
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+  const apiUrl = `${baseUrl}/api/produk?${params.toString()}`;
 
   try {
     const res = await fetch(apiUrl);
