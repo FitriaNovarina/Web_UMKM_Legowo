@@ -29,7 +29,7 @@ class ProdukController extends Controller
         ];
 
 
-        $search = $request->query('search');
+        $search = $request->query('search   ');
 
         $query = Produk::query();
 
