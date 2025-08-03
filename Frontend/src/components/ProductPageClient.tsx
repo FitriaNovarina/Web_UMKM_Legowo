@@ -35,7 +35,7 @@ export default function ProductPageClient() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("/api/kategori", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/kategori`, {
           headers: {
             "Content-Type": "application/json",
           },

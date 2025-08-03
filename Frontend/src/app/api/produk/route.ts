@@ -13,8 +13,8 @@ export async function GET(request: NextRequest) {
   if (search) {
     params.append('search', search);
   }
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://admin.legowo.id';
-  const apiUrl = `${baseUrl}/api/produk?${params.toString()}`;
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const apiUrl = `${baseUrl}/produk?${params.toString()}`;
 
   try {
     const res = await fetch(apiUrl);
