@@ -92,7 +92,7 @@ const Index = () => {
   useEffect(() => {
     const fetchFeaturedProducts = async () => {
       try {
-        const response = await fetch('https://admin.legowo.id/api/produk');
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/produk`);
         if (!response.ok) throw new Error("Server error");
         const allProducts = await response.json();
         const mappedProducts: ProductCardType[] = allProducts
@@ -101,7 +101,7 @@ const Index = () => {
             id: String(product.id),
             name: product.nama, // Assuming ProductCard uses 'name'
             category: product.kategori,
-            images: [`http://127.0.0.1:8000/uploads/${product.gambar}`],
+            images: [`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/uploads/${product.gambar}`],
             price: product.harga,
             inStock: product.stok > 0,
             // Add other fields required by ProductCardType if necessary
