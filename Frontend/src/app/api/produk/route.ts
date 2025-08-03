@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
   if (search) {
     params.append('search', search);
   }
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://admin.legowo.id';
   const apiUrl = `${baseUrl}/api/produk?${params.toString()}`;
 
   try {
