@@ -430,7 +430,7 @@ const Index = () => {
       <section className="bg-gray-50 py-10 px-10">
         <div className="font-mochiyPopOne text-[#1c2957] max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
           <div id="why-choose-us-image" data-animate>
-            <img
+            <Image
               src="https://toytime-theme.myshopify.com/cdn/shop/files/Mask_group_3514798e-7d90-4144-a900-c6b97e546f20.png?v=1707983159"
               alt="Crafting furniture"
               className="w-full h-full object-cover"

@@ -179,7 +179,7 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
               className="w-full gap-2 bg-orange-500 hover:bg-orange-600 text-white transition-all duration-300 hover:scale-105 active:scale-95 group"
               size="lg"
             >
-              <img src="/images/shopee.png" alt="Shopee" className="h-5 w-5 group-hover:animate-bounce" />
+              <Image src="/images/shopee.png" alt="Shopee" className="h-5 w-5 group-hover:animate-bounce" />
               Pesan via Shopee
             </Button>
             <Button
@@ -187,7 +187,7 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
               className="w-full gap-2 bg-pink-500 hover:bg-pink-600 text-white transition-all duration-300 hover:scale-105 active:scale-95 group"
               size="lg"
             >
-              <img src="/images/etzy.png" alt="Etsy" className="h-20 w-20 group-hover:animate-bounce" />
+              <Image src="/images/etzy.png" alt="Etsy" className="h-20 w-20 group-hover:animate-bounce" />
               Pesan via Etsy
             </Button>
 
