@@ -37,7 +37,7 @@ export default function ProductList({ selectedCategory, sortOption, searchQuery 
           params.append('search', searchQuery);
         }
 
-        const url = `/api/produk?${params.toString()}`;
+        const url = `https://admin.legowo.id/api/produk?${params.toString()}`;
         const res = await fetch(url, { cache: 'no-store' });
         const data = await res.json();
 

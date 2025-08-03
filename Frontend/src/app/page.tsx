@@ -92,7 +92,7 @@ const Index = () => {
   useEffect(() => {
     const fetchFeaturedProducts = async () => {
       try {
-        const response = await fetch("/api/produk");
+        const response = await fetch('https://admin.legowo.id/api/produk');
         if (!response.ok) throw new Error("Server error");
         const allProducts = await response.json();
         const mappedProducts: ProductCardType[] = allProducts
@@ -429,11 +429,12 @@ const Index = () => {
       {/* Why Choose Us Section */}
       <section className="bg-gray-50 py-10 px-10">
         <div className="font-mochiyPopOne text-[#1c2957] max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-          <div id="why-choose-us-image" data-animate>
+          <div id="why-choose-us-image" data-animate className="relative w-full h-full">
             <Image
-              src="https://toytime-theme.myshopify.com/cdn/shop/files/Mask_group_3514798e-7d90-4144-a900-c6b97e546f20.png?v=1707983159"
+              src="/images/shopee.png"
               alt="Crafting furniture"
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
             />
           </div>
           <div
