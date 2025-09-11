@@ -5,7 +5,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['https://legowo.id', 'https://www.legowo.id'],
+    'allowed_origins' => ['https://legowo.id', 'https://www.legowo.id', 'http://localhost:3000', 'http://localhost'],
 
     'allowed_origins_patterns' => [],
 
