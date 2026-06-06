@@ -4,7 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
+import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -32,13 +33,13 @@ const Footer = () => {
             </p>
             <div className="flex justify-center md:justify-start space-x-4">
               <a href="#" className="text-[#ff5b35]/80 hover:text-[#ff5b35] transition-colors duration-200">
-                <Facebook size={20} />
+                <FaFacebook size={20} />
               </a>
               <a href="#" className="text-[#ff5b35]/80 hover:text-[#ff5b35] transition-colors duration-200">
-                <Instagram size={20} />
+                <FaInstagram size={20} />
               </a>
               <a href="#" className="text-[#ff5b35]/80 hover:text-[#ff5b35] transition-colors duration-200">
-                <Twitter size={20} />
+                <FaTwitter size={20} />
               </a>
             </div>
           </div>

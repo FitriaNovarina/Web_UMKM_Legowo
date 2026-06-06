@@ -11,10 +11,11 @@ return new class extends Migration
      */
    public function up()
 {
-    Schema::table('produks', function (Blueprint $table) {
-        // $table->integer('stok')->default(0);
-        $table->enum('status', ['PO', 'Ready'])->default('Ready');
-    });
+    if (!Schema::hasColumn('produks', 'status')) {
+        Schema::table('produks', function (Blueprint $table) {
+            $table->enum('status', ['PO', 'Ready'])->default('Ready');
+        });
+    }
 }
 
 public function down()
